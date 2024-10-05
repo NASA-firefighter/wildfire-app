@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
-import './Overview.css'; // Create this CSS file for fire styling
-
+import './Overview.css'; // Fire animations and styling are in this CSS file
 
 interface Fire {
   id: number;
   x: number;
   y: number;
-
+  spreadTimer?: NodeJS.Timeout; // Timer to control fire spread
 }
 
 const Overview: React.FC = () => {
@@ -23,28 +21,44 @@ const Overview: React.FC = () => {
     setFires((prevFires) => [...prevFires, newFire]);
   };
 
+  // Function to spread fire every 2 seconds if not extinguished
+  const spreadFire = (fire: Fire) => {
+    const spreadTimer = setInterval(() => {
+      const newFire: Fire = {
+        id: Date.now(),
+        x: fire.x + (Math.random() * 20 - 10), // Randomly within 10px radius
+        y: fire.y + (Math.random() * 20 - 10), // Randomly within 10px radius
+      };
+      setFires((prevFires) => [...prevFires, newFire]);
+    }, 2000); // Spread every 2 seconds
 
-  // Fire spreading logic: New fire appears near an existing fire
-  const spreadFire = (id: number, x: number, y: number) => {
-    const newFire: Fire = {
-      id: Date.now(),
-      x: x + (Math.random() * 20 - 10), // Randomly within 10px radius
-      y: y + (Math.random() * 20 - 10), // Randomly within 10px radius
-    };
-    setFires((prevFires) => [...prevFires, newFire]);
+    fire.spreadTimer = spreadTimer;
   };
 
-
-  // Every 5 seconds, create a new fire
+  // Start creating a new fire every 5 seconds
   useEffect(() => {
-    const interval = setInterval(createFire, 5000);
-    return () => clearInterval(interval);
+    const fireInterval = setInterval(createFire, 5000); // Create a new fire every 5 seconds
+    return () => clearInterval(fireInterval); // Cleanup on unmount
   }, []);
 
   // Function to extinguish fire on click
   const extinguishFire = (id: number) => {
-    setFires((prevFires) => prevFires.filter((fire) => fire.id !== id));
+    setFires((prevFires) => {
+      const fireToExtinguish = prevFires.find((fire) => fire.id === id);
+      if (fireToExtinguish && fireToExtinguish.spreadTimer) {
+        clearInterval(fireToExtinguish.spreadTimer); // Stop spreading
+      }
+      return prevFires.filter((fire) => fire.id !== id); // Remove the fire
+    });
   };
+
+  // Automatically spread each fire 2 seconds after it spawns
+  useEffect(() => {
+    if (fires.length > 0) {
+      const latestFire = fires[fires.length - 1];
+      spreadFire(latestFire);
+    }
+  }, [fires]); // Spread the fire whenever a new one is added
 
   return (
     <div className="overview-container">
@@ -52,7 +66,6 @@ const Overview: React.FC = () => {
       {fires.map((fire) => (
         <div
           key={fire.id}
-
           className="container"
           style={{
             left: fire.x,
@@ -60,7 +73,6 @@ const Overview: React.FC = () => {
             position: 'absolute',
           }}
           onClick={() => extinguishFire(fire.id)} // Extinguish on click
-          onAnimationIteration={() => spreadFire(fire.id, fire.x, fire.y)} // Spread fire with each animation cycle
         >
           <div className="red flame"></div>
           <div className="orange flame"></div>
@@ -69,11 +81,9 @@ const Overview: React.FC = () => {
           <div className="blue circle"></div>
           <div className="black circle"></div>
         </div>
-
       ))}
     </div>
   );
 };
-
 
 export default Overview;
