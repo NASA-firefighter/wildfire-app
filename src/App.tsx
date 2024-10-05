@@ -1,10 +1,13 @@
+// src/App.tsx
 import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L, { LatLngExpression } from "leaflet"; // Import Leaflet types
+import L, { LatLngExpression } from "leaflet";
 import axios from "axios";
+import Header from './Header'; // Import Header
 
-// Define the GeoJSON data structure (optional but recommended)
+// Define the GeoJSON data structure
 interface FireFeature {
   type: string;
   properties: {
@@ -22,15 +25,12 @@ interface FireData {
 }
 
 const App: React.FC = () => {
-  const [fireData, setFireData] = useState<FireData | null>(null); // Use a TypeScript type
+  const [fireData, setFireData] = useState<FireData | null>(null);
 
-  // Fetch wildfire data from your Nest.js backend (or NASA API)
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<FireData>(
-          "http://localhost:3000/api/fires"
-        );
+        const response = await axios.get<FireData>("http://localhost:3000/api/fires");
         setFireData(response.data);
       } catch (error) {
         console.error("Error fetching fire data:", error);
@@ -49,32 +49,46 @@ const App: React.FC = () => {
     fillOpacity: 0.8,
   };
 
-  const center: LatLngExpression = [0, 0]; // Define center type
+  const center: LatLngExpression = [0, 0];
 
   return (
-    <div>
-      <h1>Global Wildfires Map</h1>
-      <MapContainer
-        center={center}
-        zoom={2}
-        style={{ height: "80vh", width: "100%" }}
-      >
-        {/* Use Esri World Imagery for satellite map */}
-        <TileLayer
-          url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-          attribution="Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
-        />
-        {fireData && (
-          <GeoJSON
-            data={fireData as any} // Type assertion due to GeoJSON requirements
-            pointToLayer={(feature, latlng) => {
-              return L.circleMarker(latlng, fireStyle);
-            }}
-          />
-        )}
-      </MapContainer>
-    </div>
+    <Router>
+      <div>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Overview />} />
+          <Route path="/how-wildfire-affects" element={<HowWildfireAffects />} />
+          <Route path="/wildfire-map" element={<WildfireMap fireData={fireData} fireStyle={fireStyle} center={center} />} />
+          <Route path="/firefighter-game" element={<FirefighterGame />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
+
+// Components for each route
+const Overview: React.FC = () => <h2>Overview</h2>;
+const HowWildfireAffects: React.FC = () => <h2>How Wildfire Affects Our System</h2>;
+const FirefighterGame: React.FC = () => <h2>Firefighter Game</h2>;
+
+const WildfireMap: React.FC<{ fireData: FireData | null; fireStyle: any; center: LatLngExpression; }> = ({ fireData, fireStyle, center }) => (
+  <div>
+    <h1>Wildfire Map</h1>
+    <MapContainer center={center} zoom={2} style={{ height: "80vh", width: "100%" }}>
+      <TileLayer
+        url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+        attribution="Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
+      />
+      {fireData && (
+        <GeoJSON
+          data={fireData as any}
+          pointToLayer={(feature, latlng) => {
+            return L.circleMarker(latlng, fireStyle);
+          }}
+        />
+      )}
+    </MapContainer>
+  </div>
+);
 
 export default App;
