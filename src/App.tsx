@@ -28,9 +28,8 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<FireData>(
-          "http://localhost:3000/api/fires"
-        );
+        const response = await axios.get("http://localhost:8000/api/fires");
+
         setFireData(response.data);
       } catch (error) {
         console.error("Error fetching fire data:", error);
@@ -39,6 +38,26 @@ const App: React.FC = () => {
 
     fetchData();
   }, []);
+
+  const transformToGeoJSON = (data: any): FireData => {
+    return {
+      type: "FeatureCollection",
+      features: data.map((item: any) => ({
+        type: "Feature",
+        geometry: {
+          type: "Point",
+          coordinates: [parseFloat(item.longitude), parseFloat(item.latitude)],
+        },
+        properties: {
+          brightness: item.bright_ti4,
+          confidence: item.confidence,
+          date: item.acq_date,
+          satellite: item.satellite,
+          instrument: item.instrument,
+        },
+      })),
+    };
+  };
 
   const fireStyle = {
     radius: 6,
@@ -50,6 +69,22 @@ const App: React.FC = () => {
   };
 
   const center: LatLngExpression = [0, 0]; // Define center type
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/fires");
+        console.log("Fetched fire data:", response.data);
+        const geoJSONData = transformToGeoJSON(response.data);
+        console.log("Transformed GeoJSON data:", geoJSONData);
+        setFireData(geoJSONData);
+      } catch (error) {
+        console.error("Error fetching fire data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div>
