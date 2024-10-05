@@ -67,9 +67,84 @@ const App: React.FC = () => {
 };
 
 // Components for each route
-const Overview: React.FC = () => <h2>Overview</h2>;
-const HowWildfireAffects: React.FC = () => <h2>How Wildfire Affects Our System</h2>;
-const FirefighterGame: React.FC = () => <h2>Firefighter Game</h2>;
+// src/App.tsx
+
+const Overview: React.FC = () => {
+  return (
+    <div style={contentStyle}>
+      <h2>Overview</h2>
+      <p>
+        Wildfires are uncontrolled fires that spread rapidly, consuming vegetation, and
+        can cause extensive damage to ecosystems, property, and human life. They can occur
+        in forests, grasslands, and even urban areas. Understanding wildfires is crucial
+        for implementing effective prevention, management, and recovery strategies.
+      </p>
+      <p>
+        In this application, you can explore global wildfire data, learn about their
+        effects on ecosystems and communities, view real-time maps of wildfires, and even
+        engage with interactive content.
+      </p>
+    </div>
+  );
+};
+
+const HowWildfireAffects: React.FC = () => {
+  return (
+    <div style={contentStyle}>
+      <h2>How Wildfire Affects Our System</h2>
+      <h3>Ecological Impact</h3>
+      <p>
+        Wildfires can significantly alter ecosystems. While some species have adapted to
+        thrive in fire-prone environments, many others suffer devastating losses. Fires
+        can lead to habitat destruction and displacement of wildlife, but they can also
+        stimulate new growth and maintain the health of certain ecosystems.
+      </p>
+      <h3>Climate Change</h3>
+      <p>
+        Wildfires contribute to climate change by releasing large amounts of carbon
+        dioxide and other greenhouse gases into the atmosphere. This can exacerbate
+        global warming, creating a feedback loop that leads to more frequent and intense
+        wildfires.
+      </p>
+      <h3>Community Effects</h3>
+      <p>
+        Communities near wildfire-prone areas face risks to property, air quality, and
+        public health. Evacuations and loss of infrastructure can disrupt lives and local
+        economies. Awareness and preparation are essential for mitigating these risks.
+      </p>
+    </div>
+  );
+};
+
+const FirefighterGame: React.FC = () => {
+  return (
+    <div style={contentStyle}>
+      <h2>Firefighter Game</h2>
+      <p>
+        Welcome to the Firefighter Game! In this interactive simulation, you will step
+        into the shoes of a firefighter, tasked with battling wildfires and protecting
+        your community.
+      </p>
+      <h3>Game Objective</h3>
+      <p>
+        Your mission is to strategically manage resources, coordinate firefighting efforts,
+        and successfully extinguish fires while minimizing damage to the environment and
+        ensuring the safety of local residents.
+      </p>
+      <h3>Gameplay Mechanics</h3>
+      <ul>
+        <li>Navigate through various terrains affected by wildfires.</li>
+        <li>Make decisions on resource allocation and firefighting strategies.</li>
+        <li>Respond to emergency situations and save lives!</li>
+      </ul>
+      <p>
+        Are you ready to take on the challenge and become a hero in the fight against
+        wildfires?
+      </p>
+    </div>
+  );
+};
+
 
 const WildfireMap: React.FC<{ fireData: FireData | null; fireStyle: any; center: LatLngExpression; }> = ({ fireData, fireStyle, center }) => (
   <div>
