@@ -1,0 +1,20 @@
+/* Set the forest background image */
+.overview-container {
+  background-image: url('/pics/background.webp'); /* Adjust path based on where your image is stored */
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fire styling */
+.fire {
+  position: absolute;
+  background-color: rgba(255, 69, 0, 0.8); /* Fire-like color */
+  border-radius: 50%; /* Make it circular */
+  box-shadow: 0px 0px 20px 10px rgba(255, 69, 0, 0.5),
+              0px 0px 30px 15px rgba(255, 140, 0, 0.5);
+  cursor: pointer;
+  transition: width 0.5s, height 0.5s; /* Smooth expansion */
+}
