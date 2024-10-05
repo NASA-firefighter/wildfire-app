@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import './Overview.css'; // Fire animations and styling are in this CSS file
+
+import './Overview.css'; // Create this CSS file for fire styling
+
 
 interface Fire {
   id: number;
   x: number;
   y: number;
+
 }
 
 const Overview: React.FC = () => {
@@ -20,6 +23,7 @@ const Overview: React.FC = () => {
     setFires((prevFires) => [...prevFires, newFire]);
   };
 
+
   // Fire spreading logic: New fire appears near an existing fire
   const spreadFire = (id: number, x: number, y: number) => {
     const newFire: Fire = {
@@ -29,6 +33,7 @@ const Overview: React.FC = () => {
     };
     setFires((prevFires) => [...prevFires, newFire]);
   };
+
 
   // Every 5 seconds, create a new fire
   useEffect(() => {
@@ -47,6 +52,7 @@ const Overview: React.FC = () => {
       {fires.map((fire) => (
         <div
           key={fire.id}
+
           className="container"
           style={{
             left: fire.x,
@@ -63,9 +69,11 @@ const Overview: React.FC = () => {
           <div className="blue circle"></div>
           <div className="black circle"></div>
         </div>
+
       ))}
     </div>
   );
 };
+
 
 export default Overview;
