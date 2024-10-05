@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+
 import './Overview.css'; // Create this CSS file for fire styling
+
 
 interface Fire {
   id: number;
   x: number;
   y: number;
-  size: number;
+
 }
 
 const Overview: React.FC = () => {
@@ -14,26 +16,24 @@ const Overview: React.FC = () => {
   // Function to create a new fire at a random location
   const createFire = () => {
     const newFire: Fire = {
-      id: Date.now(), // unique ID for each fire
-      x: Math.random() * window.innerWidth, // random x position
-      y: Math.random() * window.innerHeight, // random y position
-      size: 30, // initial size
+      id: Date.now(),
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
     };
     setFires((prevFires) => [...prevFires, newFire]);
   };
 
-  // Fire expansion logic
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFires((prevFires) =>
-        prevFires.map((fire) => ({
-          ...fire,
-          size: fire.size < 200 ? fire.size + 10 : fire.size, // grows until size 200
-        }))
-      );
-    }, 500); // Expand every 500ms
-    return () => clearInterval(interval);
-  }, []);
+
+  // Fire spreading logic: New fire appears near an existing fire
+  const spreadFire = (id: number, x: number, y: number) => {
+    const newFire: Fire = {
+      id: Date.now(),
+      x: x + (Math.random() * 20 - 10), // Randomly within 10px radius
+      y: y + (Math.random() * 20 - 10), // Randomly within 10px radius
+    };
+    setFires((prevFires) => [...prevFires, newFire]);
+  };
+
 
   // Every 5 seconds, create a new fire
   useEffect(() => {
@@ -52,18 +52,28 @@ const Overview: React.FC = () => {
       {fires.map((fire) => (
         <div
           key={fire.id}
-          className="fire"
+
+          className="container"
           style={{
             left: fire.x,
             top: fire.y,
-            width: fire.size,
-            height: fire.size,
+            position: 'absolute',
           }}
           onClick={() => extinguishFire(fire.id)} // Extinguish on click
-        ></div>
+          onAnimationIteration={() => spreadFire(fire.id, fire.x, fire.y)} // Spread fire with each animation cycle
+        >
+          <div className="red flame"></div>
+          <div className="orange flame"></div>
+          <div className="yellow flame"></div>
+          <div className="white flame"></div>
+          <div className="blue circle"></div>
+          <div className="black circle"></div>
+        </div>
+
       ))}
     </div>
   );
 };
+
 
 export default Overview;
