@@ -1,6 +1,6 @@
 /* Set the forest background image */
 .overview-container {
-  background-image: url('/pics/forest.webp'); /* Adjust path based on where your image is stored */
+  background-image: url('/pics/background.webp'); /* Adjust path based on where your image is stored */
   background-size: cover;
   width: 100vw;
   height: 100vh;
