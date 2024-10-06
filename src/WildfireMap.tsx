@@ -66,9 +66,12 @@ export const WildfireMap: React.FC<{
 
   const fetchFireDataByDate = async (date: string) => {
     try {
-      const response = await axios.get("http://localhost:8000/api/fires", {
-        params: { date },
-      });
+      const response = await axios.get(
+        `${process.env.REACT_APP_FIRE_API_URL}/fires`,
+        {
+          params: { date },
+        }
+      );
       console.log("Fire Data Fetch successfully", response.data);
 
       // Transform the response data to GeoJSON format

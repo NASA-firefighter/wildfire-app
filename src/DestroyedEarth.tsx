@@ -3,7 +3,7 @@ import Globe from "react-globe.gl";
 import * as THREE from "three";
 import Chart from "chart.js/auto";
 import "./DestroyedEarth.css";
-import destroyedEarth from "./assets/destroyed-earth.png";
+// import destroyedEarth from "./assets/destroyed-earth.png";
 
 type FireMarker = {
   lat: number;
