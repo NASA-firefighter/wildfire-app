@@ -52,7 +52,7 @@ export const FirefighterGame: React.FC = () => {
 
   // Navigate to a different page when the arrow is clicked
   const handleArrowClick = () => {
-    navigate('/other-page'); // Navigate to another page (make sure this route is set up)
+    navigate('/origin'); // Navigate to another page (make sure this route is set up)
   };
 
   // Inline styles for the 2D Circles with images and labels
