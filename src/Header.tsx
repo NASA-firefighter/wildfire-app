@@ -24,6 +24,9 @@ const Header: React.FC = () => {
           <li style={navItemStyle}>
             <Link to="/endangered-animals">Endangered Animals</Link>
           </li>
+          <li style={navItemStyle}>
+            <Link to="/destroyed-earth">Destroyed Earth</Link>
+          </li>
         </ul>
       </nav>
     </header>
