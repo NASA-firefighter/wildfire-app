@@ -27,6 +27,16 @@ const Header: React.FC = () => {
               Endangered Animals
             </Link>
           </li>
+          <li className="nav-item">
+            <Link to="/team" className="link">
+              Team
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/references" className="link">
+              References
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

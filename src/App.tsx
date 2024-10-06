@@ -13,6 +13,8 @@ import Overview from "./Overview";
 import { EndangeredAnimals } from "./EndangeredAnimals";
 import { DestroyedEarth } from "./DestroyedEarth";
 import { OurEffort } from "./OurEffort";
+import { Team } from "./Team"
+import { References } from "./References"
 
 export const contentStyle: React.CSSProperties = {
   padding: "20px",
@@ -35,6 +37,8 @@ const App: React.FC = () => {
           <Route path="/wildfire-map" element={<WildfireMap center={center} />} />
           <Route path="/firefighter-game" element={<Test />} />
           <Route path="/origin" element={<Origin />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/references" element={<References />} />
           <Route path="/systems" element={<Systems />} />
           <Route path="/endangered-animals" element={<EndangeredAnimals />} />
           <Route path="/destroyed-earth" element={<DestroyedEarth />} />
