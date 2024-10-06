@@ -6,6 +6,7 @@ import Header from "./Header"; // Import Header
 import { WildfireMap } from "./WildfireMap";
 import { HowWildfireAffects } from "./HowWildfireAffects";
 import { FirefighterGame } from "./FirefighterGame";
+import { OtherPage } from "./OtherPage";
 import { LatLngExpression } from "leaflet";
 import Overview from "./Overview";
 import { EndangeredAnimals } from "./EndangeredAnimals";
@@ -38,6 +39,7 @@ const App: React.FC = () => {
             element={<WildfireMap center={center} />}
           />
           <Route path="/firefighter-game" element={<FirefighterGame />} />
+          <Route path="/other-page" element={<OtherPage />} />
           <Route path="/endangered-animals" element={<EndangeredAnimals />} />
           <Route path="/destroyed-earth" element={<DestroyedEarth />} />
           <Route path="/our-effort" element={<OurEffort />} />
