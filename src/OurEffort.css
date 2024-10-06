@@ -94,6 +94,18 @@
   color: #dc3545;
 }
 
+.start-quiz-button {
+  margin-top: 16px;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
 /* Button to move to the next question */
 .next-question-button {
   margin-top: 16px;
