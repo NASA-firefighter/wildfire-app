@@ -108,3 +108,28 @@
     transform: rotate(1deg);
   }
 }
+
+/* Overview.css */
+.text-animation {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  animation: pulse 2s infinite; /* 애니메이션 추가 */
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

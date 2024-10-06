@@ -1,12 +1,35 @@
-.globe-container {
-  height: 100vh; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
-  background-image: url("pics/PIA10526.webp"); /* Path to your star texture */
-  background-size: cover; /* Cover the entire width, crop top and bottom */
-  background-position: center center; /* Center the image */
-  background-repeat: no-repeat; /* No image repetition */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative; /* Ensure children are positioned relative to the container */
+/* FirefighterGame.css */
+
+/* Styling for the 2D Circles */
+.circle {
+  width: 4cm;
+  height: 4cm;
+  border-radius: 50%;
+  border: 3px solid white; /* Change color or thickness if needed */
+  position: absolute;
+}
+
+/* Positioning the circles */
+.top-circle {
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottom-circle {
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.left-circle {
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+}
+
+.right-circle {
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
 }

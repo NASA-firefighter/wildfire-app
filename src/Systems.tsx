@@ -1,25 +1,28 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { useNavigate } from "react-router-dom";
 import Globe from "react-globe.gl";
-import * as THREE from "three"; // Import three.js for creating a starfield
+import * as THREE from "three";
 import AkoImage from './assets/Ako.png';
 import FireImage from './assets/open-fire.gif';
-import TreeImage from './assets/row of trees.png'; // Import tree image
-
+import TreeImage from './assets/row of trees.png';
 
 export const Systems: React.FC = () => {
-  const globeEl = useRef<any>(null); // Ref to control the globe
-  const [selectedTopic, setSelectedTopic] = useState<string | null>(null); // State to track which circle is clicked
-  const navigate = useNavigate(); // Use useNavigate to navigate between pages
-  const [showExplanation, setShowExplanation] = useState(false);
+  const globeEl = useRef<any>(null);
+  const navigate = useNavigate();
+  const [selectedExplanation, setSelectedExplanation] = useState<string>("기권");
 
-  // Function to create the starfield in the distant background
+  const explanations: { [key: string]: string } = {
+    기권: "기권(Atmosphere)은 지구를 둘러싼 대기층으로, 다양한 기상현상이 발생하는 곳입니다.",
+    지권: "지권(Geosphere)은 지구의 고체 부분을 말하며, 산, 흙, 암석을 포함합니다.",
+    수권: "수권(Hydrosphere)은 지구의 물이 있는 모든 영역을 포함하며, 바다, 호수, 강이 해당됩니다.",
+    생물권: "생물권(Biosphere)은 모든 생물들이 살아가는 영역으로, 육지와 바다를 모두 포함합니다."
+  };
+
   const addStarfield = (scene: THREE.Scene) => {
     const starGeometry = new THREE.BufferGeometry();
     const starMaterial = new THREE.PointsMaterial({ color: 0xffffff });
-
     const starVertices = [];
-    const distance = 4000; // Ensure stars are placed far away (distant background)
+    const distance = 4000;
     for (let i = 0; i < 10000; i++) {
       const theta = Math.random() * 2 * Math.PI;
       const phi = Math.acos(Math.random() * 2 - 1);
@@ -28,201 +31,151 @@ export const Systems: React.FC = () => {
       const z = distance * Math.cos(phi);
       starVertices.push(x, y, z);
     }
-
     starGeometry.setAttribute("position", new THREE.Float32BufferAttribute(starVertices, 3));
-
     const stars = new THREE.Points(starGeometry, starMaterial);
-    scene.add(stars); // Add stars to the scene far in the background
+    scene.add(stars);
   };
 
   useEffect(() => {
     if (globeEl.current) {
-      const scene = globeEl.current.scene(); // Access the scene
-      const camera = globeEl.current.camera(); // Access the camera
-      addStarfield(scene); // Add the starfield to the scene
-
-      globeEl.current.controls().autoRotate = true; // Optional: auto-rotate
-      globeEl.current.controls().autoRotateSpeed = 0.5; // Optional: slow rotation
+      const scene = globeEl.current.scene();
+      const camera = globeEl.current.camera();
+      addStarfield(scene);
+      globeEl.current.controls().autoRotate = true;
+      globeEl.current.controls().autoRotateSpeed = 0.5;
     }
-
-    const timer = setTimeout(() => {
-      setShowExplanation(true);
-    }, 3000);
-
-    return () => clearTimeout(timer); // Cleanup timer on unmount
   }, []);
 
-  // Function to handle click events on circles
-  const handleCircleClick = (topic: string) => {
-    setSelectedTopic(topic);
-  };
-
-  // Navigate to the next page
   const handleArrowClick = () => {
-    navigate('/systems'); // Navigate to another page (make sure this route is set up)
+    navigate('/systems');
   };
 
-  // Navigate to the previous page
   const handleBackArrowClick = () => {
-    navigate('/origin'); // Navigate back to the previous page
+    navigate('/origin');
   };
 
-    const explanationBoxStyle = {
-    width: '400px',
-    height: '480px',
-    backgroundColor: 'rgba(255, 255, 255, 0.5)', // Translucent white
+  const explanationBoxStyle = {
+    width: '900px',
+    height: '450px',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
     borderRadius: '16px',
     padding: '16px',
     textAlign: 'center' as 'center',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)',
-    transition: 'opacity 1s ease-in-out', // Smooth appearance
-    opacity: showExplanation ? 1 : 0, // Show after 3 seconds
     marginRight: '20px',
   };
 
   const explanationContainerStyle = {
-    display: 'flex', // Align boxes horizontally
-    justifyContent: 'center', // Center them horizontally
+    display: 'flex',
+    justifyContent: 'center',
     position: 'fixed' as 'fixed',
-    bottom: '50px', // Position at the bottom
+    bottom: '70px',
     left: '0',
     right: '0',
-    zIndex: 10, // Above other elements
+    zIndex: 10,
   };
 
-
-  // Ako image style: flipped and positioned at the top-left
-  const akoImageStyle = {
-    position: 'fixed' as 'fixed',
-    top: '70px', // Adjusted to top
-    left: '20px', // Right aligned
-    width: '200px',
-    height: '200px',
-    transform: 'scaleX(-1)', // Flip horizontally
-  };
-
-  // Speech Bubble style: positioned to the right of Ako
-  const speechBubbleStyle = {
-    background: '#fff',
-    width: '250px',
-    boxShadow: '0 4px 12px 0px rgba(0, 0, 0, 0.18)',
-    borderRadius: '16px',
-    border: '1px solid #ECECEF',
-    position: 'fixed' as 'fixed',
-    top: '100px', // Align with Ako image
-    left: '230px', // Positioned to the right of Ako
-    padding: '12px',
-    textAlign: 'center' as 'center',
-  };
-
-  const arrowStyle = {
-    content: '""',
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '-20px', // Arrow points from the left side of the bubble
-    transform: 'translateY(-50%)',
-    width: '0',
-    height: '0',
-    borderTop: '10px solid transparent',
-    borderBottom: '10px solid transparent',
-    borderRight: '20px solid #fff',
-  };
-
-  const arrowButtonStyle = {
-    position: 'fixed' as 'fixed',
-    top: '90px',
-    right: '20px',
-    width: '50px',
-    height: '50px',
-    backgroundColor: '#fff',
-    border: '2px solid #000',
-    borderRadius: '10px',
-    cursor: 'pointer',
-    textAlign: 'center' as 'center',
+  const buttonContainerStyle = {
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)',
-  };
-
-  // Style for back arrow button
-  const backArrowButtonStyle = {
-    ...arrowButtonStyle,
-    right: '80px', // Position it to the left of the forward arrow
-  };
-
-  // Style for the tree image at the bottom
-  const treeImageStyle = {
     position: 'fixed' as 'fixed',
-    bottom: '0px',
-    left: '0px',
-    width: '100%',
-    //height: '20%',
-    transform: 'scaleX(-1)',
+    top: '150px',
+    left: '0',
+    right: '0',
+    zIndex: 11,
+    gap: '10px', // 버튼 간격을 10px로 설정
   };
 
-  const fireImageStyle = {
-    position: 'fixed' as 'fixed',
-    top: '70px',
-    left: '0px',
-    width: '100%',
-    height: '100%',
-    transform: 'scaleX(-1)',
+  // Custom button styles
+  const buttonStyle = {
+    width: '130px',
+    height: '40px',
+    color: '#fff',
+    borderRadius: '5px',
+    padding: '10px 25px',
+    fontFamily: "'Lato', sans-serif",
+    fontWeight: 500,
+    background: 'transparent',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    position: 'relative' as 'relative',
+    display: 'inline-block' as 'inline-block',
+    boxShadow: 'inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(0,0,0,.1)',
+    outline: 'none',
+    border: 'none',
+    backgroundColor: 'rgb(32,90,191)',
+    backgroundImage: 'linear-gradient(0deg, rgba(6,14,131,1) 0%, rgba(12,25,180,1) 100%)',
   };
 
+  const buttonHoverStyle = {
+    backgroundColor: 'rgb(143,172,223)',
+    backgroundImage: 'linear-gradient(0deg, rgba(0,3,255,1) 0%, rgba(2,126,251,1) 100%)',
+  };
 
   return (
     <div style={{ height: '100vh', width: '100vw', position: 'relative', backgroundColor: 'black' }}>
-      {/* Globe component */}
       <Globe
         ref={globeEl}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
         bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
         backgroundColor="black"
         animateIn={true}
-        onGlobeReady={() => {
-          if (globeEl.current) {
-            const scene = globeEl.current.scene();
-            const camera = globeEl.current.camera();
-            addStarfield(scene);
-          }
-        }}
       />
 
-      {/* Explanations for 자연 발화 and 인위적 발화 */}
+      {/* Buttons for topic selection */}
+      <div style={buttonContainerStyle}>
+        <button
+          style={buttonStyle}
+          onMouseOver={e => Object.assign(e.currentTarget.style, buttonHoverStyle)}
+          onMouseOut={e => Object.assign(e.currentTarget.style, buttonStyle)}
+          onClick={() => setSelectedExplanation("기권")}
+        >
+          기권
+        </button>
+        <button
+          style={buttonStyle}
+          onMouseOver={e => Object.assign(e.currentTarget.style, buttonHoverStyle)}
+          onMouseOut={e => Object.assign(e.currentTarget.style, buttonStyle)}
+          onClick={() => setSelectedExplanation("지권")}
+        >
+          지권
+        </button>
+        <button
+          style={buttonStyle}
+          onMouseOver={e => Object.assign(e.currentTarget.style, buttonHoverStyle)}
+          onMouseOut={e => Object.assign(e.currentTarget.style, buttonStyle)}
+          onClick={() => setSelectedExplanation("수권")}
+        >
+          수권
+        </button>
+        <button
+          style={buttonStyle}
+          onMouseOver={e => Object.assign(e.currentTarget.style, buttonHoverStyle)}
+          onMouseOut={e => Object.assign(e.currentTarget.style, buttonStyle)}
+          onClick={() => setSelectedExplanation("생물권")}
+        >
+          생물권
+        </button>
+      </div>
+
+      {/* Explanation Box */}
       <div style={explanationContainerStyle}>
         <div style={explanationBoxStyle}>
-          <p>채은</p>
-        </div>
-        <div style={explanationBoxStyle}>
-          <p>다연</p>
+          <p>{explanations[selectedExplanation]}</p>
         </div>
       </div>
 
-      {/* Flipped Ako image at the top-left */}
-      <img src={AkoImage} alt="Ako" style={akoImageStyle} />
+      <img src={AkoImage} alt="Ako" style={{ position: 'fixed', top: '70px', left: '20px', width: '200px', height: '200px', transform: 'scaleX(-1)' }} />
 
-      {/* Speech Bubble - Positioned to the right of Ako */}
-      <div style={speechBubbleStyle}>
-        <p>Here is the speech bubble!</p>
-        <div style={arrowStyle} />
-      </div>
-
-      {/* Fire effect rendered on top of the tree image */}
-      <img src={FireImage} alt="open-fire" style={fireImageStyle} />
-
-      {/* Forward arrow button */}
-      <div style={arrowButtonStyle} onClick={handleArrowClick}>
+      <div style={{ position: 'fixed', top: '90px', right: '20px', width: '50px', height: '50px', backgroundColor: '#fff', border: '2px solid #000', borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)' }} onClick={handleArrowClick}>
         →
       </div>
 
-      {/* Back arrow button */}
-      <div style={backArrowButtonStyle} onClick={handleBackArrowClick}>
+      <div style={{ position: 'fixed', top: '90px', right: '80px', width: '50px', height: '50px', backgroundColor: '#fff', border: '2px solid #000', borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)' }} onClick={handleBackArrowClick}>
         ←
       </div>
 
-      {/* Tree image at the bottom */}
-      <img src={TreeImage} alt="Row of Trees" style={treeImageStyle} />
+      <img src={TreeImage} alt="Row of Trees" style={{ position: 'fixed', bottom: '0px', left: '0px', width: '100%', transform: 'scaleX(-1)' }} />
     </div>
   );
 };
