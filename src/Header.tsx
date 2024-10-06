@@ -37,6 +37,11 @@ const Header: React.FC = () => {
               Destroyed Earth
             </Link>
           </li>
+          <li className="nav-item">
+            <Link to="/our-effort" className="link">
+              Our Effort
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>
