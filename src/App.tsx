@@ -6,7 +6,8 @@ import Header from "./Header"; // Import Header
 import { WildfireMap } from "./WildfireMap";
 import { HowWildfireAffects } from "./HowWildfireAffects";
 import { FirefighterGame } from "./FirefighterGame";
-import { OtherPage } from "./OtherPage";
+import { Origin } from "./Origin";
+import  { Systems }  from "./Systems";
 import { LatLngExpression } from "leaflet";
 import Overview from "./Overview";
 import { EndangeredAnimals } from "./EndangeredAnimals";
@@ -30,16 +31,11 @@ const App: React.FC = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Overview />} />
-          <Route
-            path="/how-wildfire-affects"
-            element={<HowWildfireAffects />}
-          />
-          <Route
-            path="/wildfire-map"
-            element={<WildfireMap center={center} />}
-          />
+          <Route path="/how-wildfire-affects" element={<HowWildfireAffects />} />
+          <Route path="/wildfire-map" element={<WildfireMap center={center} />} />
           <Route path="/firefighter-game" element={<FirefighterGame />} />
-          <Route path="/other-page" element={<OtherPage />} />
+          <Route path="/origin" element={<Origin />} />
+          <Route path="/systems" element={<Systems />} />
           <Route path="/endangered-animals" element={<EndangeredAnimals />} />
           <Route path="/destroyed-earth" element={<DestroyedEarth />} />
           <Route path="/our-effort" element={<OurEffort />} />

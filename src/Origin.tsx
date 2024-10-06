@@ -2,16 +2,12 @@ import React, { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import Globe from "react-globe.gl";
 import * as THREE from "three"; // Import three.js for creating a starfield
-import skyImage from './assets/sky.webp';
-import soilImage from './assets/soil.webp';
-import plantImage from './assets/plant.webp';
-import oceanImage from './assets/ocean.webp';
 import AkoImage from './assets/Ako.png';
 import FireImage from './assets/open-fire.gif';
 import TreeImage from './assets/row of trees.png'; // Import tree image
 
 
-export const OtherPage: React.FC = () => {
+export const Origin: React.FC = () => {
   const globeEl = useRef<any>(null); // Ref to control the globe
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null); // State to track which circle is clicked
   const navigate = useNavigate(); // Use useNavigate to navigate between pages
@@ -63,12 +59,12 @@ export const OtherPage: React.FC = () => {
 
   // Navigate to the next page
   const handleArrowClick = () => {
-    navigate('/other-page'); // Navigate to another page (make sure this route is set up)
+    navigate('/systems'); // Navigate to another page (make sure this route is set up)
   };
 
   // Navigate to the previous page
   const handleBackArrowClick = () => {
-    navigate(-1); // Navigate back to the previous page
+    navigate('/firefighter-game'); // Navigate back to the previous page
   };
 
     const explanationBoxStyle = {
@@ -158,10 +154,10 @@ export const OtherPage: React.FC = () => {
   // Style for the tree image at the bottom
   const treeImageStyle = {
     position: 'fixed' as 'fixed',
-    top: '70px',
+    bottom: '0px',
     left: '0px',
     width: '100%',
-    height: '100%',
+    //height: '20%',
     transform: 'scaleX(-1)',
   };
 
