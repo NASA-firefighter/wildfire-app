@@ -8,6 +8,7 @@ import akikikiIcon from "./assets/akikiki-icon.png";
 import koalaIcon from "./assets/koala-icon.png";
 import orangutanIcon from "./assets/orangutan-icon.png";
 import griffonVultureIcon from "./assets/griffon-vulture-icon.png";
+import AkoImage from "./assets/Ako.png";
 
 // CSS animations
 import "./EndangeredAnimals.css";
@@ -25,6 +26,7 @@ export const EndangeredAnimals: React.FC = () => {
   const [activeAnimal, setActiveAnimal] = useState<string | null>(null); // Track which animal is "speaking"
   const center: LatLngExpression = [20, 0]; // Global center
   const [showReadMore, setShowReadMore] = useState<boolean>(false);
+  const [showAkoMessage, setShowAkoMessage] = useState<boolean>(true); // State to control Ako's message
 
   const animals: AnimalData[] = [
     {
@@ -111,6 +113,11 @@ export const EndangeredAnimals: React.FC = () => {
     },
   ];
 
+  // Handle click on Ako to show or hide the message
+  const handleAkoClick = () => {
+    setShowAkoMessage(!showAkoMessage);
+  };
+
   return (
     <div>
       <h1>Endangered Animals</h1>
@@ -163,6 +170,34 @@ export const EndangeredAnimals: React.FC = () => {
           </Marker>
         ))}
       </MapContainer>
+
+      {/* Ako character */}
+      <img
+        src={AkoImage}
+        alt="Ako the Koala"
+        className="ako-image"
+        style={{ cursor: "pointer", zIndex: 1000 }}
+        onClick={handleAkoClick}
+      />
+
+      {/* Speech bubble or message for Ako */}
+      {showAkoMessage && (
+        <div className="speech-bubble">
+          <TypingAnimation
+            text={`I'm here to guide you through this map and help you
+            learn about endangered animals. These animals are in danger because
+            their homes are being destroyed by wildfires and other human
+            activities. Click on an animal to learn more about how we can help!`}
+            onComplete={() => {
+              // wait for 3 seconds
+              setTimeout(() => {
+                setShowAkoMessage(false);
+              }, 2000);
+            }}
+          />
+          <div className="arrow" />
+        </div>
+      )}
     </div>
   );
 };
