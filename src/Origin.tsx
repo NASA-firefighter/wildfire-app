@@ -2,16 +2,16 @@ import React, { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import Globe from "react-globe.gl";
 import * as THREE from "three"; // Import three.js for creating a starfield
-import skyImage from './assets/sky.webp';
-import soilImage from './assets/soil.webp';
-import plantImage from './assets/plant.webp';
-import oceanImage from './assets/ocean.webp';
 import AkoImage from './assets/Ako.png';
+import FireImage from './assets/open-fire.gif';
+import TreeImage from './assets/row of trees.png'; // Import tree image
 
-export const OtherPage: React.FC = () => {
+
+export const Origin: React.FC = () => {
   const globeEl = useRef<any>(null); // Ref to control the globe
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null); // State to track which circle is clicked
   const navigate = useNavigate(); // Use useNavigate to navigate between pages
+  const [showExplanation, setShowExplanation] = useState(false);
 
   // Function to create the starfield in the distant background
   const addStarfield = (scene: THREE.Scene) => {
@@ -35,7 +35,6 @@ export const OtherPage: React.FC = () => {
     scene.add(stars); // Add stars to the scene far in the background
   };
 
-
   useEffect(() => {
     if (globeEl.current) {
       const scene = globeEl.current.scene(); // Access the scene
@@ -45,6 +44,12 @@ export const OtherPage: React.FC = () => {
       globeEl.current.controls().autoRotate = true; // Optional: auto-rotate
       globeEl.current.controls().autoRotateSpeed = 0.5; // Optional: slow rotation
     }
+
+    const timer = setTimeout(() => {
+      setShowExplanation(true);
+    }, 3000);
+
+    return () => clearTimeout(timer); // Cleanup timer on unmount
   }, []);
 
   // Function to handle click events on circles
@@ -54,61 +59,58 @@ export const OtherPage: React.FC = () => {
 
   // Navigate to the next page
   const handleArrowClick = () => {
-    navigate('/other-page'); // Navigate to another page (make sure this route is set up)
+    navigate('/systems'); // Navigate to another page (make sure this route is set up)
   };
 
   // Navigate to the previous page
   const handleBackArrowClick = () => {
-    navigate(-1); // Navigate back to the previous page
+    navigate('/how-wildfire-affects'); // Navigate back to the previous page
   };
 
-  // Inline styles for the 2D Circles with images and labels
-  const circleContainerStyle = {
-    width: '2cm',
-    height: '2cm',
-    position: 'absolute' as 'absolute',
-    border: '3px solid white',
-    borderRadius: '50%',
-    overflow: 'hidden',
+    const explanationBoxStyle = {
+    width: '400px',
+    height: '480px',
+    backgroundColor: 'rgba(255, 255, 255, 0.5)', // Translucent white
+    borderRadius: '16px',
+    padding: '16px',
     textAlign: 'center' as 'center',
-    cursor: 'pointer',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)',
+    transition: 'opacity 1s ease-in-out', // Smooth appearance
+    opacity: showExplanation ? 1 : 0, // Show after 3 seconds
+    marginRight: '20px',
   };
 
-  const imageStyle = {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover' as 'cover',
-    borderRadius: '50%',
+  const explanationContainerStyle = {
+    display: 'flex', // Align boxes horizontally
+    justifyContent: 'center', // Center them horizontally
+    position: 'fixed' as 'fixed',
+    bottom: '50px', // Position at the bottom
+    left: '0',
+    right: '0',
+    zIndex: 10, // Above other elements
   };
 
-  const labelStyle = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    color: 'white',
-    fontSize: '1.2em',
-    fontWeight: 'bold' as 'bold',
-    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
-  };
 
+  // Ako image style: flipped and positioned at the top-left
   const akoImageStyle = {
     position: 'fixed' as 'fixed',
-    bottom: '20px',
-    right: '50px',
+    top: '70px', // Adjusted to top
+    left: '20px', // Right aligned
     width: '200px',
     height: '200px',
+    transform: 'scaleX(-1)', // Flip horizontally
   };
 
+  // Speech Bubble style: positioned to the right of Ako
   const speechBubbleStyle = {
     background: '#fff',
-    width: '300px',
+    width: '250px',
     boxShadow: '0 4px 12px 0px rgba(0, 0, 0, 0.18)',
     borderRadius: '16px',
     border: '1px solid #ECECEF',
     position: 'fixed' as 'fixed',
-    bottom: '130px',
-    right: '280px',
+    top: '100px', // Align with Ako image
+    left: '230px', // Positioned to the right of Ako
     padding: '12px',
     textAlign: 'center' as 'center',
   };
@@ -116,14 +118,14 @@ export const OtherPage: React.FC = () => {
   const arrowStyle = {
     content: '""',
     position: 'absolute' as 'absolute',
-    top: '70%',
-    right: '-20px',
+    top: '50%',
+    left: '-20px', // Arrow points from the left side of the bubble
     transform: 'translateY(-50%)',
     width: '0',
     height: '0',
     borderTop: '10px solid transparent',
     borderBottom: '10px solid transparent',
-    borderLeft: '20px solid #fff',
+    borderRight: '20px solid #fff',
   };
 
   const arrowButtonStyle = {
@@ -149,6 +151,26 @@ export const OtherPage: React.FC = () => {
     right: '80px', // Position it to the left of the forward arrow
   };
 
+  // Style for the tree image at the bottom
+  const treeImageStyle = {
+    position: 'fixed' as 'fixed',
+    bottom: '0px',
+    left: '0px',
+    width: '100%',
+    //height: '20%',
+    transform: 'scaleX(-1)',
+  };
+
+  const fireImageStyle = {
+    position: 'fixed' as 'fixed',
+    top: '70px',
+    left: '0px',
+    width: '100%',
+    height: '100%',
+    transform: 'scaleX(-1)',
+  };
+
+
   return (
     <div style={{ height: '100vh', width: '100vw', position: 'relative', backgroundColor: 'black' }}>
       {/* Globe component */}
@@ -167,15 +189,27 @@ export const OtherPage: React.FC = () => {
         }}
       />
 
-      {/* Fixed image at the bottom-right */}
+      {/* Explanations for 자연 발화 and 인위적 발화 */}
+      <div style={explanationContainerStyle}>
+        <div style={explanationBoxStyle}>
+          <p>자연 발화: 번개, 고온으로 인해 발생</p>
+        </div>
+        <div style={explanationBoxStyle}>
+          <p>인위적 발화: 인간 활동으로 인한 화재</p>
+        </div>
+      </div>
+
+      {/* Flipped Ako image at the top-left */}
       <img src={AkoImage} alt="Ako" style={akoImageStyle} />
 
-      {/* Speech Bubble - Visible when a topic is selected */}
-      {selectedTopic && (
-        <div style={speechBubbleStyle}>
-          <div style={arrowStyle} />
-        </div>
-      )}
+      {/* Speech Bubble - Positioned to the right of Ako */}
+      <div style={speechBubbleStyle}>
+        <p>Here is the speech bubble!</p>
+        <div style={arrowStyle} />
+      </div>
+
+      {/* Fire effect rendered on top of the tree image */}
+      <img src={FireImage} alt="open-fire" style={fireImageStyle} />
 
       {/* Forward arrow button */}
       <div style={arrowButtonStyle} onClick={handleArrowClick}>
@@ -186,6 +220,9 @@ export const OtherPage: React.FC = () => {
       <div style={backArrowButtonStyle} onClick={handleBackArrowClick}>
         ←
       </div>
+
+      {/* Tree image at the bottom */}
+      <img src={TreeImage} alt="Row of Trees" style={treeImageStyle} />
     </div>
   );
 };
