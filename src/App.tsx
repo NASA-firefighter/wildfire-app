@@ -20,15 +20,6 @@ export const contentStyle: React.CSSProperties = {
 const App: React.FC = () => {
   const center: LatLngExpression = [0, 0];
 
-  const fireStyle = {
-    radius: 6,
-    fillColor: "#ff7800",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8,
-  };
-
   return (
     <Router>
       <div>

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import './Overview.css'; // Fire animations and styling are in this CSS file
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react";
+import "./Overview.css"; // Fire animations and styling are in this CSS file
 
 interface Fire {
   id: number;
@@ -69,7 +70,7 @@ const Overview: React.FC = () => {
           style={{
             left: fire.x,
             top: fire.y,
-            position: 'absolute',
+            position: "absolute",
           }}
           onClick={() => extinguishFire(fire.id)} // Extinguish on click
         >
