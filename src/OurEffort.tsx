@@ -3,6 +3,7 @@ import Globe from "react-globe.gl";
 import * as THREE from "three";
 import AkoImage from "./assets/Ako.png";
 import "./OurEffort.css"; // Import the CSS file
+import { useNavigate } from "react-router-dom";
 
 export const OurEffort: React.FC = () => {
   const globeEl = useRef<any>(null);
@@ -11,6 +12,15 @@ export const OurEffort: React.FC = () => {
   const [score, setScore] = useState<number>(0);
   const [isQuizFinished, setIsQuizFinished] = useState<boolean>(false);
   const [isQuizStarted, setIsQuizStarted] = useState<boolean>(false); // Track if the quiz has started
+  const navigate = useNavigate();
+
+  const handleArrowClick = () => {
+    navigate('/wildfire-map');
+  };
+
+  const handleBackArrowClick = () => {
+    navigate('/destroyed-earth');
+  };
 
   const quizQuestions = [
     {
@@ -213,6 +223,13 @@ export const OurEffort: React.FC = () => {
           </button>
         </div>
       )}
+      <div style={{ position: 'fixed', top: '90px', right: '20px', width: '50px', height: '50px', backgroundColor: '#fff', border: '2px solid #000', borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)' }} onClick={handleArrowClick}>
+        →
+      </div>
+
+      <div style={{ position: 'fixed', top: '90px', right: '80px', width: '50px', height: '50px', backgroundColor: '#fff', border: '2px solid #000', borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)' }} onClick={handleBackArrowClick}>
+        ←
+      </div>
     </div>
   );
 };

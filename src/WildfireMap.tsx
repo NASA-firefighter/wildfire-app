@@ -158,7 +158,7 @@ export const WildfireMap: React.FC<{
 
   return (
     <div>
-      <h1>Wildfire Map</h1>
+      <h1> &nbsp; &nbsp; See Wildfire Map</h1>
 
       <div
         ref={monthScrollRef}
