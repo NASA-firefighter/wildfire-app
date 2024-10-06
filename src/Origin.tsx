@@ -64,7 +64,7 @@ export const Origin: React.FC = () => {
 
   // Navigate to the previous page
   const handleBackArrowClick = () => {
-    navigate('/firefighter-game'); // Navigate back to the previous page
+    navigate('/how-wildfire-affects'); // Navigate back to the previous page
   };
 
     const explanationBoxStyle = {

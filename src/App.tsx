@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "leaflet/dist/leaflet.css";
 import Header from "./Header"; // Import Header
 import { WildfireMap } from "./WildfireMap";
+import { Test } from "./test";
 import { HowWildfireAffects } from "./HowWildfireAffects";
-import { FirefighterGame } from "./FirefighterGame";
 import { Origin } from "./Origin";
 import  { Systems }  from "./Systems";
 import { LatLngExpression } from "leaflet";
@@ -33,7 +33,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Overview />} />
           <Route path="/how-wildfire-affects" element={<HowWildfireAffects />} />
           <Route path="/wildfire-map" element={<WildfireMap center={center} />} />
-          <Route path="/firefighter-game" element={<FirefighterGame />} />
+          <Route path="/firefighter-game" element={<Test />} />
           <Route path="/origin" element={<Origin />} />
           <Route path="/systems" element={<Systems />} />
           <Route path="/endangered-animals" element={<EndangeredAnimals />} />
