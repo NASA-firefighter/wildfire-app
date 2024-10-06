@@ -20,3 +20,4 @@ export const getMonthsFrom2023 = () => {
 
   return months;
 };
+

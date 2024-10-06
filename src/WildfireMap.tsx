@@ -1,4 +1,6 @@
+
 import { useEffect, useState, useRef } from "react";
+
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import L, { LatLngExpression } from "leaflet";
 import fireIconUrl from "./assets/fire-icon.png";
