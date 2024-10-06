@@ -1,0 +1,26 @@
+/* Header.css */
+.header {
+  background-color: #282c34;
+  padding: 10px;
+  color: white;
+}
+
+.nav-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-item {
+  margin: 0 15px;
+}
+
+.link {
+  color: white;
+  text-decoration: none; /* Optional, removes underline */
+}
+
+.link:hover {
+  color: lightgray; /* Optional, hover effect */
+}
