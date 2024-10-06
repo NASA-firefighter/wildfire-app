@@ -58,3 +58,4 @@ export const HowWildfireAffects: React.FC = () => {
     </div>
   );
 };
+
