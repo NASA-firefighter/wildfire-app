@@ -1,0 +1,36 @@
+.overlay {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 50%;
+  height: 80%;
+  text-align: center;
+}
+
+.overlay h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.overlay p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.overlay button {
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.overlay button:hover {
+  background-color: #e64a19;
+}
