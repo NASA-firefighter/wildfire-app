@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
 import L from "leaflet";
@@ -31,28 +32,28 @@ export const EndangeredAnimals: React.FC = () => {
   const navigate = useNavigate();
 
   const handleArrowClick = () => {
-    navigate('/destroyed-earth');
+    navigate("/destroyed-earth");
   };
 
   const handleBackArrowClick = () => {
-    navigate('/systems');
+    navigate("/systems");
   };
 
   const arrowButtonStyle = {
-    position: 'fixed' as 'fixed',
-    top: '90px',
-    right: '20px',
-    width: '50px',
-    height: '50px',
-    backgroundColor: '#fff',
-    border: '2px solid #000',
-    borderRadius: '10px',
-    cursor: 'pointer',
-    textAlign: 'center' as 'center',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)',
+    position: "fixed" as "fixed",
+    top: "90px",
+    right: "20px",
+    width: "50px",
+    height: "50px",
+    backgroundColor: "#fff",
+    border: "2px solid #000",
+    borderRadius: "10px",
+    cursor: "pointer",
+    textAlign: "center" as "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.18)",
   };
 
   const animals: AnimalData[] = [
@@ -147,7 +148,10 @@ export const EndangeredAnimals: React.FC = () => {
 
   return (
     <div>
-      <h1> &nbsp; &nbsp; What endangered animals have been affected by wildfires?</h1>
+      <h1>
+        {" "}
+        &nbsp; &nbsp; What endangered animals have been affected by wildfires?
+      </h1>
       <MapContainer
         center={center}
         zoom={2}
@@ -225,11 +229,45 @@ export const EndangeredAnimals: React.FC = () => {
           <div className="arrow" />
         </div>
       )}
-      <div style={{ position: 'fixed', top: '90px', right: '20px', width: '50px', height: '50px', backgroundColor: '#fff', border: '2px solid #000', borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)' }} onClick={handleArrowClick}>
+      <div
+        style={{
+          position: "fixed",
+          top: "90px",
+          right: "20px",
+          width: "50px",
+          height: "50px",
+          backgroundColor: "#fff",
+          border: "2px solid #000",
+          borderRadius: "10px",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.18)",
+        }}
+        onClick={handleArrowClick}
+      >
         →
       </div>
 
-      <div style={{ position: 'fixed', top: '90px', right: '80px', width: '50px', height: '50px', backgroundColor: '#fff', border: '2px solid #000', borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)' }} onClick={handleBackArrowClick}>
+      <div
+        style={{
+          position: "fixed",
+          top: "90px",
+          right: "80px",
+          width: "50px",
+          height: "50px",
+          backgroundColor: "#fff",
+          border: "2px solid #000",
+          borderRadius: "10px",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.18)",
+        }}
+        onClick={handleBackArrowClick}
+      >
         ←
       </div>
     </div>

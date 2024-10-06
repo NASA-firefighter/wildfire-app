@@ -23,14 +23,6 @@ const fireIcon = L.icon({
   popupAnchor: [0, -32],
 });
 
-interface CO2Data {
-  entity: string;
-  code: string;
-  year: number;
-  annual_carbon_dioxide_emissions: number;
-  coordinates: number[];
-}
-
 interface GeoJSONData {
   type: string;
   features: GeoJSONFeature[];
