@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { useNavigate } from "react-router-dom";
 import Globe from "react-globe.gl";
-import * as THREE from "three"; // Import three.js for creating a starfield
+import * as THREE from "three";
 import skyImage from './assets/sky.webp';
 import soilImage from './assets/soil.webp';
 import plantImage from './assets/plant.webp';
@@ -13,16 +13,35 @@ export const HowWildfireAffects: React.FC = () => {
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const topicDescriptions: { [key: string]: string } = {
-    Atmosphere: 'Atmosphere' +
-        '\r\n' +
-        'weathers rocks.' +
-        'provides the oxygen and carbon dioxide needed for respiration and photosynthesis for living beings.' +
-        'creates waves'
-    ,
-    Hydrosphere: '수권(Hydrosphere)은 지구의 물이 있는 모든 영역을 포함하며, 바다, 호수, 강이 해당됩니다.',
-    Geosphere: '지권(Geosphere)은 지구의 고체 부분을 말하며, 산, 흙, 암석을 포함합니다.',
-    Biosphere: '생물권(Biosphere)은 모든 생물들이 살아가는 영역으로, 육지와 바다를 모두 포함합니다.',
+  const topicData: { [key: string]: { title: string; description: string } } = {
+    Atmosphere: {
+      title: 'Atmosphere',
+      description:
+        '• Weathers rocks.\r\n' +
+        '• Provides the oxygen and carbon dioxide needed for respiration and photosynthesis for living beings.\r\n' +
+        '• Creates waves.',
+    },
+    Hydrosphere: {
+      title: 'Hydrosphere',
+      description:
+          '• Supplies water and provides habitats for living beings.\r\n' +
+        '• Generates typhoons.\r\n' +
+        '• Creates beautiful landscapes.',
+    },
+    Geosphere: {
+      title: 'Geosphere',
+      description:
+        '• Provides land where living beings can thrive.\r\n' +
+        '• Erupts volcanic ash and gases, causing changes in Earth\'s temperature.\r\n' +
+        '• Melts and moves materials into the hydrosphere.',
+    },
+    Biosphere: {
+      title: 'Biosphere',
+      description:
+          '• Supplies oxygen to the hydrosphere.\r\n' +
+        '• Maintains the composition of the atmosphere through photosynthesis and respiration.\r\n' +
+        '• Alters the Earth\'s surface.',
+    },
   };
 
   // Add starfield function
@@ -57,11 +76,11 @@ export const HowWildfireAffects: React.FC = () => {
   }, []);
 
   const handleCircleClick = (topic: string) => {
-    setSelectedTopic(topic); // Set the selected topic to display its description
+    setSelectedTopic(topic);
   };
 
   const handleArrowClick = () => {
-    navigate('/origin'); // Navigate to another page
+    navigate('/origin');
   };
 
   // Inline styles for the 2D Circles with images and labels
@@ -105,13 +124,13 @@ export const HowWildfireAffects: React.FC = () => {
     content: '""',
     position: 'absolute' as 'absolute',
     top: '70%',
-    right: '-20px', // Move the arrow to the right of the speech bubble
+    right: '-20px',
     transform: 'translateY(-50%)',
     width: '0',
     height: '0',
     borderTop: '10px solid transparent',
     borderBottom: '10px solid transparent',
-    borderLeft: '20px solid #fff', // Match the background of the speech bubble
+    borderLeft: '20px solid #fff',
   };
 
   const speechBubbleStyle = {
@@ -121,14 +140,13 @@ export const HowWildfireAffects: React.FC = () => {
     borderRadius: '16px',
     border: '1px solid #ECECEF',
     position: 'fixed' as 'fixed',
-    bottom: '130px', // Position above Ako image
-    right: '280px', // Move it to the left of Ako
+    bottom: '130px',
+    right: '280px',
     padding: '12px',
     textAlign: 'center' as 'center',
   };
 
-
-    // Explanation circle style that appears in front of the globe
+  // Explanation circle style
   const explanationCircleStyle = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -142,12 +160,22 @@ export const HowWildfireAffects: React.FC = () => {
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center' as 'center',
-    fontSize: '1.2em',
-    fontWeight: 'bold' as 'bold',
-    color: '#000',
+    flexDirection: 'column' as 'column',
     padding: '20px',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-    zIndex: 5, // Positioned in front of the globe (lower z-index than the globe)
+    zIndex: 5,
+  };
+
+  const titleStyle = {
+    fontSize: '1.5em',
+    fontWeight: 'bold' as 'bold',
+    color: 'blue',
+    marginBottom: '10px', // Adds space between title and description
+  };
+
+  const descriptionStyle = {
+    fontSize: '1.0em',
+    whiteSpace: 'pre-line' as 'pre-line', // Enables line breaks in the description
   };
 
   const arrowButtonStyle = {
@@ -169,7 +197,6 @@ export const HowWildfireAffects: React.FC = () => {
 
   return (
     <div style={{ height: '100vh', width: '100vw', position: 'relative', backgroundColor: 'black' }}>
-      {/* Globe component */}
       <Globe
         ref={globeEl}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
@@ -178,7 +205,6 @@ export const HowWildfireAffects: React.FC = () => {
         animateIn={true}
       />
 
-      {/* 2D Circles */}
       <div onClick={() => handleCircleClick('Atmosphere')} style={{ ...circleContainerStyle, top: '10%', left: '50%', transform: 'translateX(-50%)' }}>
         <img src={skyImage} alt="Atmosphere" style={imageStyle} />
         <div style={labelStyle}>Atmosphere</div>
@@ -199,28 +225,25 @@ export const HowWildfireAffects: React.FC = () => {
         <div style={labelStyle}>Biosphere</div>
       </div>
 
-      {/* Fixed Ako image */}
       <img src={AkoImage} alt="Ako" style={akoImageStyle} />
 
-      {/* Explanation Circle in the center when a topic is selected */}
       {selectedTopic && (
         <div style={explanationCircleStyle}>
-          <p>{topicDescriptions[selectedTopic]}</p>
+          <div style={titleStyle}>{topicData[selectedTopic].title}</div>
+          <div style={descriptionStyle}>{topicData[selectedTopic].description}</div>
         </div>
       )}
 
-
-
-      {/* Arrow button for navigation */}
       <div style={arrowButtonStyle} onClick={handleArrowClick}>
         →
       </div>
 
       <div style={speechBubbleStyle}>
-        <p>This is our Earth system. The Earth system interacts perfectly. </p>
+        <p> This is our Earth system.
+        The Earth system interacts perfectly.
+        This is a truly beautiful balance. </p>
         <div style={arrowStyle} />
       </div>
-
     </div>
   );
 };

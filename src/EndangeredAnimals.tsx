@@ -1,7 +1,8 @@
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
 import L from "leaflet";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import pygmyRabbitIcon from "./assets/pygmy-rabbit-icon.png";
 import frogIcon from "./assets/frog-icon.png";
 import akikikiIcon from "./assets/akikiki-icon.png";
@@ -27,6 +28,32 @@ export const EndangeredAnimals: React.FC = () => {
   const center: LatLngExpression = [20, 0]; // Global center
   const [showReadMore, setShowReadMore] = useState<boolean>(false);
   const [showAkoMessage, setShowAkoMessage] = useState<boolean>(true); // State to control Ako's message
+  const navigate = useNavigate();
+
+  const handleArrowClick = () => {
+    navigate('/destroyed-earth');
+  };
+
+  const handleBackArrowClick = () => {
+    navigate('/systems');
+  };
+
+  const arrowButtonStyle = {
+    position: 'fixed' as 'fixed',
+    top: '90px',
+    right: '20px',
+    width: '50px',
+    height: '50px',
+    backgroundColor: '#fff',
+    border: '2px solid #000',
+    borderRadius: '10px',
+    cursor: 'pointer',
+    textAlign: 'center' as 'center',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)',
+  };
 
   const animals: AnimalData[] = [
     {
@@ -120,7 +147,7 @@ export const EndangeredAnimals: React.FC = () => {
 
   return (
     <div>
-      <h1>Endangered Animals</h1>
+      <h1> &nbsp; &nbsp; What endangered animals have been affected by wildfires?</h1>
       <MapContainer
         center={center}
         zoom={2}
@@ -198,6 +225,13 @@ export const EndangeredAnimals: React.FC = () => {
           <div className="arrow" />
         </div>
       )}
+      <div style={{ position: 'fixed', top: '90px', right: '20px', width: '50px', height: '50px', backgroundColor: '#fff', border: '2px solid #000', borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)' }} onClick={handleArrowClick}>
+        →
+      </div>
+
+      <div style={{ position: 'fixed', top: '90px', right: '80px', width: '50px', height: '50px', backgroundColor: '#fff', border: '2px solid #000', borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)' }} onClick={handleBackArrowClick}>
+        ←
+      </div>
     </div>
   );
 };

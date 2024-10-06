@@ -3,6 +3,7 @@ import Globe from "react-globe.gl";
 import * as THREE from "three";
 import Chart from "chart.js/auto";
 import "./DestroyedEarth.css";
+import { useNavigate } from "react-router-dom";
 // import destroyedEarth from "./assets/destroyed-earth.png";
 
 type FireMarker = {
@@ -16,6 +17,15 @@ export const DestroyedEarth: React.FC = () => {
   const chartRef = useRef<HTMLCanvasElement | null>(null); // Chart reference
   const chartInstance = useRef<Chart | null>(null); // Ref to store the Chart instance
   const [showOverlay, setShowOverlay] = useState(true); // To control the overlay
+  const navigate = useNavigate();
+
+  const handleArrowClick = () => {
+    navigate('/our-effort');
+  };
+
+  const handleBackArrowClick = () => {
+    navigate('/endangered-animals');
+  };
 
   // Wildfire marker data
   const fireMarkers: FireMarker[] = [
@@ -39,6 +49,25 @@ export const DestroyedEarth: React.FC = () => {
       const z = distance * Math.cos(phi);
       starVertices.push(x, y, z);
     }
+
+    const arrowButtonStyle = {
+    position: 'fixed' as 'fixed',
+    top: '90px',
+    right: '20px',
+    width: '50px',
+    height: '50px',
+    backgroundColor: '#fff',
+    border: '2px solid #000',
+    borderRadius: '10px',
+    cursor: 'pointer',
+    textAlign: 'center' as 'center',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)',
+  };
+
+
 
     starGeometry.setAttribute(
       "position",
@@ -115,6 +144,8 @@ export const DestroyedEarth: React.FC = () => {
       6.18, 8.69, 9.87, 9.32, 5.16, 5.92, 3.42, 8.71, 9.32, 4.32, 3.6, 10.13,
       5.46, 10.03, 8.77, 4.65, 10.1, 7.13, 7.57,
     ];
+
+
 
     // Create the chart
     if (chartRef.current) {
@@ -212,6 +243,13 @@ export const DestroyedEarth: React.FC = () => {
           <button onClick={() => setShowOverlay(false)}>Close</button>
         </div>
       )}
+      <div style={{ position: 'fixed', top: '90px', right: '20px', width: '50px', height: '50px', backgroundColor: '#fff', border: '2px solid #000', borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)' }} onClick={handleArrowClick}>
+        →
+      </div>
+
+      <div style={{ position: 'fixed', top: '90px', right: '80px', width: '50px', height: '50px', backgroundColor: '#fff', border: '2px solid #000', borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)' }} onClick={handleBackArrowClick}>
+        ←
+      </div>
     </div>
   );
 };
