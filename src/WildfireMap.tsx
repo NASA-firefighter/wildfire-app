@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+
+import { useEffect, useState, useRef } from "react";
+
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import L, { LatLngExpression } from "leaflet";
 import fireIconUrl from "./assets/fire-icon.png";
@@ -47,6 +49,9 @@ export const WildfireMap: React.FC<{
   const [selectedMonth, setSelectedMonth] = useState<string>(getCurrentMonth());
   const [fireData, setFireData] = useState<GeoJSONData | null>(null);
 
+  // Create a ref to the month scroll container
+  const monthScrollRef = useRef<HTMLDivElement | null>(null);
+
   // Handle month change
   const handleMonthChange = (monthValue: string) => {
     setSelectedMonth(monthValue);
@@ -91,8 +96,11 @@ export const WildfireMap: React.FC<{
     }
   };
 
-  // Fetch wildfire data from your backend for the selected month
+  // Scroll to the most recent month when the component mounts
   useEffect(() => {
+    if (monthScrollRef.current) {
+      monthScrollRef.current.scrollLeft = monthScrollRef.current.scrollWidth; // Scroll to the end
+    }
     handleMonthChange(selectedMonth);
   }, [selectedMonth]);
 
@@ -102,6 +110,7 @@ export const WildfireMap: React.FC<{
 
       {/* Scrollable Month Selection */}
       <div
+        ref={monthScrollRef} // Attach the ref to the scrollable container
         style={{
           display: "flex",
           overflowX: "auto",
