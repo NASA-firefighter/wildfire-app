@@ -7,6 +7,9 @@ import soilImage from './assets/soil.webp';
 import plantImage from './assets/plant.webp';
 import oceanImage from './assets/ocean.webp';
 import AkoImage from './assets/Ako.png';
+import FireImage from './assets/open-fire.gif';
+import TreeImage from './assets/row of trees.png'; // Import tree image
+
 
 export const OtherPage: React.FC = () => {
   const globeEl = useRef<any>(null); // Ref to control the globe
@@ -34,7 +37,6 @@ export const OtherPage: React.FC = () => {
     const stars = new THREE.Points(starGeometry, starMaterial);
     scene.add(stars); // Add stars to the scene far in the background
   };
-
 
   useEffect(() => {
     if (globeEl.current) {
@@ -92,12 +94,14 @@ export const OtherPage: React.FC = () => {
     textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
   };
 
+  // Ako image style: flipped and positioned at the top-right
   const akoImageStyle = {
     position: 'fixed' as 'fixed',
-    bottom: '20px',
-    right: '50px',
+    top: '70px', // Adjusted to top
+    left: '20px', // Right aligned
     width: '200px',
     height: '200px',
+    transform: 'scaleX(-1)', // Flip horizontally
   };
 
   const speechBubbleStyle = {
@@ -149,6 +153,28 @@ export const OtherPage: React.FC = () => {
     right: '80px', // Position it to the left of the forward arrow
   };
 
+  // Style for the tree image at the bottom
+  const treeImageStyle = {
+    position: 'fixed' as 'fixed',
+    top: '70px', // Adjusted to top
+    left: '0px', // Right aligned
+    width: '100%',
+    height: '100%',
+    transform: 'scaleX(-1)', // Flip horizontally
+
+  };
+
+  const fireImageStyle = {
+    position: 'fixed' as 'fixed',
+    top: '70px', // Adjusted to top
+    left: '0px', // Right aligned
+    width: '100%',
+    height: '100%',
+    transform: 'scaleX(-1)', // Flip horizontally
+
+  };
+
+
   return (
     <div style={{ height: '100vh', width: '100vw', position: 'relative', backgroundColor: 'black' }}>
       {/* Globe component */}
@@ -167,8 +193,12 @@ export const OtherPage: React.FC = () => {
         }}
       />
 
-      {/* Fixed image at the bottom-right */}
+      {/* Flipped Ako image at the top-right */}
       <img src={AkoImage} alt="Ako" style={akoImageStyle} />
+
+
+      {/* Fire effect rendered on top of the tree image */}
+      <img src={FireImage} alt="open-fire" style={fireImageStyle} />
 
       {/* Speech Bubble - Visible when a topic is selected */}
       {selectedTopic && (
@@ -177,15 +207,20 @@ export const OtherPage: React.FC = () => {
         </div>
       )}
 
+
       {/* Forward arrow button */}
       <div style={arrowButtonStyle} onClick={handleArrowClick}>
         →
       </div>
 
+
       {/* Back arrow button */}
       <div style={backArrowButtonStyle} onClick={handleBackArrowClick}>
         ←
       </div>
+
+      {/* Tree image at the bottom */}
+      <img src={TreeImage} alt="Row of Trees" style={treeImageStyle} />
     </div>
   );
 };
