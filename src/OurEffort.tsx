@@ -9,9 +9,9 @@ export const OurEffort: React.FC = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [score, setScore] = useState<number>(0);
-  const [isQuizFinished, setIsQuizFinished] = useState<boolean>(false); // Track if the quiz is over
+  const [isQuizFinished, setIsQuizFinished] = useState<boolean>(false);
+  const [isQuizStarted, setIsQuizStarted] = useState<boolean>(false); // Track if the quiz has started
 
-  // Quiz questions and answers
   const quizQuestions = [
     {
       question: "What can we do to reduce CO2 emissions?",
@@ -66,28 +66,28 @@ export const OurEffort: React.FC = () => {
   const handleAnswerSelection = (answer: string) => {
     setSelectedAnswer(answer);
     if (answer === quizQuestions[currentQuestionIndex].correctAnswer) {
-      setScore(score + 1); // Increase score if the answer is correct
+      setScore(score + 1);
     }
   };
 
   const handleNextQuestion = () => {
-    setSelectedAnswer(null); // Reset selected answer
+    setSelectedAnswer(null);
 
     if (currentQuestionIndex + 1 < quizQuestions.length) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1); // Move to the next question
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      setIsQuizFinished(true); // End the quiz if there are no more questions
+      setIsQuizFinished(true);
     }
   };
 
   const handleRestartQuiz = () => {
-    setCurrentQuestionIndex(0); // Restart from the first question
-    setScore(0); // Reset the score
-    setSelectedAnswer(null); // Reset the selected answer
-    setIsQuizFinished(false); // Start the quiz again
+    setCurrentQuestionIndex(0);
+    setScore(0);
+    setSelectedAnswer(null);
+    setIsQuizFinished(false);
+    setIsQuizStarted(false); // Reset to show the description again
   };
 
-  // Function to create the starfield in the distant background
   const addStarfield = (scene: THREE.Scene) => {
     const starGeometry = new THREE.BufferGeometry();
     const starMaterial = new THREE.PointsMaterial({ color: 0xffffff });
@@ -133,16 +133,29 @@ export const OurEffort: React.FC = () => {
         animateIn={true}
       />
 
-      {/* Fixed image at the bottom-right (clickable koala image) */}
-      <img
-        src={AkoImage}
-        alt="Ako the Koala"
-        className="ako-image"
-        onClick={handleNextQuestion} // Move to the next question on click
-      />
+      {/* Fixed image at the bottom-right (clickable Ako image) */}
+      <img src={AkoImage} alt="Ako the Koala" className="ako-image" />
 
       {/* Speech Bubble */}
-      {!isQuizFinished ? (
+      {!isQuizStarted ? (
+        <div className="speech-bubble">
+          <p>
+            Hello! I'm Ako the Koala 🐨. Are you ready to learn about how we can
+            save the planet?
+          </p>
+          <p>
+            Click the button below to start the quiz and see how much you know
+            about helping the environment!
+          </p>
+          <button
+            className="start-quiz-button"
+            onClick={() => setIsQuizStarted(true)}
+          >
+            Start Quiz
+          </button>
+          <div className="arrow" />
+        </div>
+      ) : !isQuizFinished ? (
         <div className="speech-bubble">
           <p>{quizQuestions[currentQuestionIndex].question}</p>
           <div>
@@ -154,7 +167,7 @@ export const OurEffort: React.FC = () => {
                     selectedAnswer === option ? "selected-option" : ""
                   }`}
                   onClick={() => handleAnswerSelection(option)}
-                  disabled={!!selectedAnswer} // Disable selection after an answer is chosen
+                  disabled={!!selectedAnswer}
                 >
                   {option}
                 </button>
@@ -162,7 +175,6 @@ export const OurEffort: React.FC = () => {
             )}
           </div>
 
-          {/* Show explanation and feedback */}
           {selectedAnswer && (
             <div>
               <p
