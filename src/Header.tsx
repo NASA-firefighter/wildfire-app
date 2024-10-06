@@ -23,23 +23,8 @@ const Header: React.FC = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/firefighter-game" className="link">
-              Firefighter Game
-            </Link>
-          </li>
-          <li className="nav-item">
             <Link to="/endangered-animals" className="link">
               Endangered Animals
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/destroyed-earth" className="link">
-              Destroyed Earth
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/our-effort" className="link">
-              Our Effort
             </Link>
           </li>
         </ul>

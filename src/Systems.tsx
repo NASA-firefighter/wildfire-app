@@ -12,10 +12,19 @@ export const Systems: React.FC = () => {
   const [selectedExplanation, setSelectedExplanation] = useState<string>("기권");
 
   const explanations: { [key: string]: string } = {
-    기권: "기권(Atmosphere)은 지구를 둘러싼 대기층으로, 다양한 기상현상이 발생하는 곳입니다.",
-    지권: "지권(Geosphere)은 지구의 고체 부분을 말하며, 산, 흙, 암석을 포함합니다.",
-    수권: "수권(Hydrosphere)은 지구의 물이 있는 모든 영역을 포함하며, 바다, 호수, 강이 해당됩니다.",
-    생물권: "생물권(Biosphere)은 모든 생물들이 살아가는 영역으로, 육지와 바다를 모두 포함합니다."
+    Atmosphere:
+        '• Air Pollution: Smoke and harmful substances released from fires degrade air quality and increase concentrations of fine particulate matter (PM2.5) and carbon dioxide (CO2).\n\n' +
+        '• Temperature Changes: Fires raise surrounding temperatures, which can temporarily alter the local climate.\n\n' +
+        '• Changes in Climate Patterns: Large-scale fires can shift local climate patterns, particularly affecting temperature and precipitation. In the long term, they may contribute to climate change.',
+    Geosphere:
+        '• Soil Loss: When fires destroy vegetation in the soil, erosion increases and soil fertility decreases.\n\n' +
+        '• Nutrient Cycling: The loss of organic matter due to fires can disrupt nutrient cycling in the soil, which affects future plant growth.\n\n',
+    Hydrosphere:
+        '• Changes in Water Cycle: When vegetation in an area is destroyed by fire, evaporation and precipitation patterns can change, affecting the region\'s water sources.\n\n',
+    Biosphere:
+        '• Destruction of Habitats: Fires destroy habitats for plants and animals, leading to a decrease in biodiversity. Many species suffer direct damage or lose their homes.\n\n' +
+        '• Recovery Process: After a fire, ecosystems undergo a recovery process, which can restore biodiversity over time. However, this process can take decades.\n\n' +
+        '• Endangered Species: When habitats are destroyed by wildfires, the survival chances of endangered species are further diminished.\n',
   };
 
   const addStarfield = (scene: THREE.Scene) => {
@@ -47,22 +56,25 @@ export const Systems: React.FC = () => {
   }, []);
 
   const handleArrowClick = () => {
-    navigate('/systems');
+    navigate('/endangered-animals');
   };
 
   const handleBackArrowClick = () => {
     navigate('/origin');
   };
 
+  // 스타일 수정: 글씨 크기를 키우고 줄바꿈 처리
   const explanationBoxStyle = {
     width: '900px',
     height: '450px',
     backgroundColor: 'rgba(255, 255, 255, 0.7)',
     borderRadius: '16px',
     padding: '16px',
-    textAlign: 'center' as 'center',
+    textAlign: 'left' as 'left', // 왼쪽 정렬로 변경
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)',
     marginRight: '20px',
+    fontSize: '1.2em', // 글씨 크기 키움
+    whiteSpace: 'pre-wrap' as 'pre-wrap', // 줄바꿈 적용
   };
 
   const explanationContainerStyle = {
@@ -84,6 +96,32 @@ export const Systems: React.FC = () => {
     right: '0',
     zIndex: 11,
     gap: '10px', // 버튼 간격을 10px로 설정
+  };
+
+  const speechBubbleStyle = {
+    background: '#fff',
+    width: '150px',
+    boxShadow: '0 4px 12px 0px rgba(0, 0, 0, 0.18)',
+    borderRadius: '16px',
+    border: '1px solid #ECECEF',
+    position: 'fixed' as 'fixed',
+    top: '100px',
+    left: '230px',
+    padding: '12px',
+    textAlign: 'center' as 'center',
+  };
+
+  const arrowStyle = {
+    content: '""',
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '-20px',
+    transform: 'translateY(-50%)',
+    width: '0',
+    height: '0',
+    borderTop: '10px solid transparent',
+    borderBottom: '10px solid transparent',
+    borderRight: '20px solid #fff',
   };
 
   // Custom button styles
@@ -128,33 +166,33 @@ export const Systems: React.FC = () => {
           style={buttonStyle}
           onMouseOver={e => Object.assign(e.currentTarget.style, buttonHoverStyle)}
           onMouseOut={e => Object.assign(e.currentTarget.style, buttonStyle)}
-          onClick={() => setSelectedExplanation("기권")}
+          onClick={() => setSelectedExplanation("Atmosphere")}
         >
-          기권
+          Atmosphere
         </button>
         <button
           style={buttonStyle}
           onMouseOver={e => Object.assign(e.currentTarget.style, buttonHoverStyle)}
           onMouseOut={e => Object.assign(e.currentTarget.style, buttonStyle)}
-          onClick={() => setSelectedExplanation("지권")}
+          onClick={() => setSelectedExplanation("Geosphere")}
         >
-          지권
+          Geosphere
         </button>
         <button
           style={buttonStyle}
           onMouseOver={e => Object.assign(e.currentTarget.style, buttonHoverStyle)}
           onMouseOut={e => Object.assign(e.currentTarget.style, buttonStyle)}
-          onClick={() => setSelectedExplanation("수권")}
+          onClick={() => setSelectedExplanation("Hydrosphere")}
         >
-          수권
+          Hydrosphere
         </button>
         <button
           style={buttonStyle}
           onMouseOver={e => Object.assign(e.currentTarget.style, buttonHoverStyle)}
           onMouseOut={e => Object.assign(e.currentTarget.style, buttonStyle)}
-          onClick={() => setSelectedExplanation("생물권")}
+          onClick={() => setSelectedExplanation("Biosphere")}
         >
-          생물권
+          Biosphere
         </button>
       </div>
 
@@ -173,6 +211,11 @@ export const Systems: React.FC = () => {
 
       <div style={{ position: 'fixed', top: '90px', right: '80px', width: '50px', height: '50px', backgroundColor: '#fff', border: '2px solid #000', borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)' }} onClick={handleBackArrowClick}>
         ←
+      </div>
+
+      <div style={speechBubbleStyle}>
+        <p> How Does the Earth System Change When a Wildfire Occurs? </p>
+        <div style={arrowStyle} />
       </div>
 
       <img src={TreeImage} alt="Row of Trees" style={{ position: 'fixed', bottom: '0px', left: '0px', width: '100%', transform: 'scaleX(-1)' }} />
