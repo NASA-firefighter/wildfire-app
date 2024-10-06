@@ -10,6 +10,7 @@ import { LatLngExpression } from "leaflet";
 import Overview from "./Overview";
 import { EndangeredAnimals } from "./EndangeredAnimals";
 import { DestroyedEarth } from "./DestroyedEarth";
+import { OurEffort } from "./OurEffort";
 
 export const contentStyle: React.CSSProperties = {
   padding: "20px",
@@ -39,6 +40,7 @@ const App: React.FC = () => {
           <Route path="/firefighter-game" element={<FirefighterGame />} />
           <Route path="/endangered-animals" element={<EndangeredAnimals />} />
           <Route path="/destroyed-earth" element={<DestroyedEarth />} />
+          <Route path="/our-effort" element={<OurEffort />} />
         </Routes>
       </div>
     </Router>

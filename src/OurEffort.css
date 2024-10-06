@@ -1,0 +1,113 @@
+/* Main container for the globe */
+.globe-container {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  background-color: black;
+}
+
+/* Style for the bottom-right Ako image (koala) */
+.ako-image {
+  position: fixed;
+  bottom: 20px;
+  right: 50px;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.ako-image:hover {
+  transform: scale(1.1); /* Slight hover effect */
+}
+
+/* Style for the speech bubble */
+.speech-bubble {
+  background: white;
+  width: 300px;
+  box-shadow: 0 4px 12px 0px rgba(0, 0, 0, 0.18);
+  border-radius: 16px;
+  border: 1px solid #ececef;
+  position: fixed;
+  bottom: 130px;
+  right: 280px;
+  padding: 16px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+  transition: transform 0.2s;
+}
+
+.speech-bubble p {
+  margin: 8px 0;
+}
+
+.arrow {
+  content: "";
+  position: absolute;
+  top: 70%;
+  right: -20px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 20px solid white;
+}
+
+/* Style for the quiz options buttons */
+.quiz-option {
+  display: block;
+  margin: 10px 0;
+  padding: 10px 16px;
+  font-size: 14px;
+  border: 2px solid #ececef;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.quiz-option:hover {
+  background-color: #d9f7be; /* Greenish hover effect */
+}
+
+.quiz-option:disabled {
+  cursor: not-allowed;
+}
+
+.selected-option {
+  background-color: lightgreen;
+}
+
+/* Correct/Incorrect feedback */
+.feedback {
+  margin-top: 16px;
+  font-weight: bold;
+}
+
+.correct {
+  color: #28a745;
+}
+
+.incorrect {
+  color: #dc3545;
+}
+
+/* Button to move to the next question */
+.next-question-button {
+  margin-top: 16px;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.next-question-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
