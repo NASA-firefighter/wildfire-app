@@ -50,7 +50,7 @@ const Overview: React.FC = () => {
 
   // Start spawning a new fire every 1 second
   useEffect(() => {
-    const fireInterval = setInterval(spawnFire, 1000); // Spawn a fire every 1 second
+    const fireInterval = setInterval(spawnFire, 500); // Spawn a fire every 1 second
     return () => clearInterval(fireInterval); // Cleanup on unmount
   }, [fires]); // Fires should spawn based on current state of fires
 
@@ -84,3 +84,4 @@ const Overview: React.FC = () => {
 };
 
 export default Overview;
+wq

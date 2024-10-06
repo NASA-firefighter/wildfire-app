@@ -1,0 +1,45 @@
+/* src/HowWildfireAffects.css */
+
+/* Full-screen space background with stars */
+.space-background {
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+.space-background:after {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background-image: url('https://www.transparenttextures.com/patterns/stardust.png'); /* A starry pattern */
+  animation: moveStars 60s linear infinite;
+  opacity: 0.3;
+}
+
+/* Stars slowly moving to simulate space */
+@keyframes moveStars {
+  from {
+    transform: translate(-50%, 0);
+  }
+  to {
+    transform: translate(-50%, -1000px);
+  }
+}
+
+/* Center the globe on the screen */
+.globe-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

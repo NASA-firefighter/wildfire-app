@@ -5,6 +5,7 @@ import "leaflet/dist/leaflet.css";
 import axios from "axios";
 import Header from "./Header"; // Import Header
 import { Overview } from "./Overview";
+import { wildfire } from "./wildfire";
 import { WildfireMap } from "./WildfireMap";
 import { HowWildfireAffects } from "./HowWildfireAffects";
 import { FirefighterGame } from "./FirefighterGame";
@@ -94,7 +95,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Overview />} />
           <Route
             path="/how-wildfire-affects"
-            element={<HowWildfireAffects />}
+            element={<wildfire />} // Use the newly created component
           />
           <Route
             path="/wildfire-map"
