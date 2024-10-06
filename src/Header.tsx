@@ -1,53 +1,46 @@
-// src/Header.tsx
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Header.css"; // Import the CSS file
 
 const Header: React.FC = () => {
   return (
-    <header style={headerStyle}>
+    <header className="header">
       <nav>
-        <ul style={navListStyle}>
-          <li style={navItemStyle}>
-            <Link to="/">Overview</Link>
+        <ul className="nav-list">
+          <li className="nav-item">
+            <Link to="/" className="link">
+              Overview
+            </Link>
           </li>
-          <li style={navItemStyle}>
-            <Link to="/how-wildfire-affects">
+          <li className="nav-item">
+            <Link to="/how-wildfire-affects" className="link">
               How Wildfire Affects Our System
             </Link>
           </li>
-          <li style={navItemStyle}>
-            <Link to="/wildfire-map">Wildfire Map</Link>
+          <li className="nav-item">
+            <Link to="/wildfire-map" className="link">
+              Wildfire Map
+            </Link>
           </li>
-          <li style={navItemStyle}>
-            <Link to="/firefighter-game">Firefighter Game</Link>
+          <li className="nav-item">
+            <Link to="/firefighter-game" className="link">
+              Firefighter Game
+            </Link>
           </li>
-          <li style={navItemStyle}>
-            <Link to="/endangered-animals">Endangered Animals</Link>
+          <li className="nav-item">
+            <Link to="/endangered-animals" className="link">
+              Endangered Animals
+            </Link>
           </li>
-          <li style={navItemStyle}>
-            <Link to="/destroyed-earth">Destroyed Earth</Link>
+          <li className="nav-item">
+            <Link to="/destroyed-earth" className="link">
+              Destroyed Earth
+            </Link>
           </li>
         </ul>
       </nav>
     </header>
   );
-};
-
-const headerStyle: React.CSSProperties = {
-  backgroundColor: "#282c34",
-  padding: "10px",
-  color: "white",
-};
-
-const navListStyle: React.CSSProperties = {
-  listStyleType: "none",
-  padding: 0,
-  display: "flex",
-  justifyContent: "space-around",
-};
-
-const navItemStyle: React.CSSProperties = {
-  margin: "0 15px",
 };
 
 export default Header;
