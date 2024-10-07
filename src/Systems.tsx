@@ -13,15 +13,24 @@ export const Systems: React.FC = () => {
 
   const explanations: { [key: string]: string } = {
     Atmosphere:
-      "• Air Pollution: Smoke and harmful substances released from fires degrade air quality and increase concentrations of fine particulate matter (PM2.5) and carbon dioxide (CO2).\n\n" +
-      "• Temperature Changes: Fires raise surrounding temperatures, which can temporarily alter the local climate.\n\n" +
-      "• Changes in Climate Patterns: Large-scale fires can shift local climate patterns, particularly affecting temperature and precipitation. In the long term, they may contribute to climate change.",
+      "Interactions between wildfire and Atmosphere\n\n" +
+      "• Particulate matter: Wildfires release large amounts of particulate matter into the atmosphere, including smoke, soot, and ash. These particles can cause respiratory problems, cardiovascular disease, and other health issues.\n\n" +
+      "• Air pollution: Wildfires also emit various air pollutants, such as carbon monoxide, nitrogen oxides, and volatile organic compounds. These pollutants can contribute to smog, acid rain, and ozone formation\n\n" +
+      "• Greenhouse gas emissions: Wildfires release significant amounts of carbon dioxide and other greenhouse gases into the atmosphere. This contributes to global warming and climate change.\n\n" +
+      "• Albedo effects: Wildfires can alter the Earth's albedo, which is its ability to reflect sunlight. Burned areas often have a darker surface, which absorbs more heat and contributes to warming.",
     Geosphere:
-      "• Soil Loss: When fires destroy vegetation in the soil, erosion increases and soil fertility decreases.\n\n" +
-      "• Nutrient Cycling: The loss of organic matter due to fires can disrupt nutrient cycling in the soil, which affects future plant growth.\n\n",
+      "Interactions between wildfire and Geosphere\n\n" +
+      "• Increased erosion: When wildfires strip vegetation from the landscape, the soil becomes more susceptible to erosion. Rainwater can easily wash away the exposed soil, leading to landslides and sedimentation in waterways.\n\n" +
+      "• Nutrient loss: Fires can destroy organic matter in the soil, reducing its fertility and nutrient content. This can hinder plant growth and ecosystem recovery.",
     Hydrosphere:
-      "• Changes in Water Cycle: When vegetation in an area is destroyed by fire, evaporation and precipitation patterns can change, affecting the region's water sources.\n\n",
+      "Interaction between wildfire an Hydrosphere\n\n" +
+      "Sedimentation: Wildfires can lead to increased soil erosion, which can result in sedimentation in waterways. This can reduce water clarity, impair aquatic ecosystems, and clog irrigation systems.\n\n" +
+      "Contamination: Burned vegetation and ash can release pollutants into water sources, contaminating drinking water and harming aquatic life.\n\n" +
+      "Nutrient loading: Wildfires can release nutrients from the soil into waterways, leading to eutrophication, or excessive nutrient enrichment, which can cause algal blooms and oxygen depletion.\n\n" +
+      "Water runoff: Wildfires can alter the landscape, making it more susceptible to water runoff. This can lead to increased flooding and erosion.\n\n" +
+      "Water retention: Burned areas may have reduced vegetation cover, which can affect water retention in the soil. This can lead to decreased groundwater recharge and reduced streamflow.\n\n",
     Biosphere:
+      "Interaction between wildfire an Biosphere\n\n" +
       "• Destruction of Habitats: Fires destroy habitats for plants and animals, leading to a decrease in biodiversity. Many species suffer direct damage or lose their homes.\n\n" +
       "• Recovery Process: After a fire, ecosystems undergo a recovery process, which can restore biodiversity over time. However, this process can take decades.\n\n" +
       "• Endangered Species: When habitats are destroyed by wildfires, the survival chances of endangered species are further diminished.\n",
