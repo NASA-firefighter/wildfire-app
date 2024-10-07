@@ -14,7 +14,7 @@ const Header: React.FC = () => {
           </li>
           <li className="nav-item">
             <Link to="/how-wildfire-affects" className="link">
-              How Wildfire Affects Our System
+              How Wildfires Impact The Earth's System
             </Link>
           </li>
           <li className="nav-item">

@@ -244,6 +244,7 @@ export const EndangeredAnimals: React.FC = () => {
           alignItems: "center",
           justifyContent: "center",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.18)",
+          zIndex: 1000,
         }}
         onClick={handleArrowClick}
       >
@@ -265,6 +266,7 @@ export const EndangeredAnimals: React.FC = () => {
           alignItems: "center",
           justifyContent: "center",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.18)",
+          zIndex: 1000,
         }}
         onClick={handleBackArrowClick}
       >
