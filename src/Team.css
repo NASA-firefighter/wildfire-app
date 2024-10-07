@@ -1,0 +1,27 @@
+/* team.css */
+.team-container {
+  margin: 20px;
+  padding: 20px;
+}
+
+.team-member {
+  text-align: center;
+  background-color: #f8f9fa; /* Light background */
+  border: 1px solid #dee2e6; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 15px;
+  margin-bottom: 20px;
+  transition: transform 0.2s; /* Smooth hover effect */
+}
+
+.team-member:hover {
+  transform: scale(1.05); /* Scale up on hover */
+}
+
+.member-photo {
+  width: 100%;
+  height: auto; /* Responsive photo */
+  border-radius: 50%; /* Circular photo */
+  max-width: 150px; /* Maximum width */
+  margin-bottom: 10px; /* Space below photo */
+}
