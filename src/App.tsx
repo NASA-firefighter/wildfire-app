@@ -13,8 +13,10 @@ import Overview from "./Overview";
 import { EndangeredAnimals } from "./EndangeredAnimals";
 import { DestroyedEarth } from "./DestroyedEarth";
 import { OurEffort } from "./OurEffort";
-import { Team } from "./Team"
-import { References } from "./References"
+import { Team }  from "./Team"
+import { References }  from "./References"
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export const contentStyle: React.CSSProperties = {
   padding: "20px",
