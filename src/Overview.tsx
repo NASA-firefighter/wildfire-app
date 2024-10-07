@@ -119,7 +119,9 @@ const Overview: React.FC = () => {
       ))}
 
       {/* Centered animated text */}
-      <div className="text-animation">How wildfire impacts on Earth system</div>
+      <div className="text-animation">
+        How Wildfires Impact The Earth's System
+      </div>
 
       <img src={AkoImage} alt="Ako" style={akoImageStyle} />
 
