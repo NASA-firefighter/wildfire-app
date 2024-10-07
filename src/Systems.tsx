@@ -228,7 +228,7 @@ export const Systems: React.FC = () => {
       {/* Explanation Box */}
       <div style={explanationContainerStyle}>
         <div style={explanationBoxStyle}>
-          <p>{explanations[selectedExplanation]}</p>
+          <p style={{ margin: "12px" }}>{explanations[selectedExplanation]}</p>
         </div>
       </div>
 
