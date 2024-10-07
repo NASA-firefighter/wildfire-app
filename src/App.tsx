@@ -7,16 +7,14 @@ import { WildfireMap } from "./WildfireMap";
 import { Test } from "./test";
 import { HowWildfireAffects } from "./HowWildfireAffects";
 import { Origin } from "./Origin";
-import  { Systems }  from "./Systems";
+import { Systems } from "./Systems";
 import { LatLngExpression } from "leaflet";
 import Overview from "./Overview";
 import { EndangeredAnimals } from "./EndangeredAnimals";
 import { DestroyedEarth } from "./DestroyedEarth";
 import { OurEffort } from "./OurEffort";
-import { Team }  from "./Team"
-import { References }  from "./References"
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { Team } from "./Team";
+import { References } from "./References";
 
 export const contentStyle: React.CSSProperties = {
   padding: "20px",
@@ -35,8 +33,14 @@ const App: React.FC = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Overview />} />
-          <Route path="/how-wildfire-affects" element={<HowWildfireAffects />} />
-          <Route path="/wildfire-map" element={<WildfireMap center={center} />} />
+          <Route
+            path="/how-wildfire-affects"
+            element={<HowWildfireAffects />}
+          />
+          <Route
+            path="/wildfire-map"
+            element={<WildfireMap center={center} />}
+          />
           <Route path="/firefighter-game" element={<Test />} />
           <Route path="/origin" element={<Origin />} />
           <Route path="/team" element={<Team />} />

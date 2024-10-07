@@ -1,27 +1,91 @@
-/* team.css */
+/* Team.css */
+
 .team-container {
-  margin: 20px;
-  padding: 20px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+}
+
+h2.text-center {
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
 }
 
 .team-member {
+  flex: 1 1 30%;
+  max-width: 30%;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  background-color: #f8f9fa; /* Light background */
-  border: 1px solid #dee2e6; /* Light border */
-  border-radius: 8px; /* Rounded corners */
-  padding: 15px;
-  margin-bottom: 20px;
-  transition: transform 0.2s; /* Smooth hover effect */
 }
 
 .team-member:hover {
-  transform: scale(1.05); /* Scale up on hover */
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.member-photo-container {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 15px;
+  overflow: hidden;
+  border-radius: 50%;
 }
 
 .member-photo {
   width: 100%;
-  height: auto; /* Responsive photo */
-  border-radius: 50%; /* Circular photo */
-  max-width: 150px; /* Maximum width */
-  margin-bottom: 10px; /* Space below photo */
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.team-member:hover .member-photo {
+  transform: scale(1.1);
+}
+
+.member-name {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 10px 0;
+}
+
+.member-role {
+  font-size: 1.2rem;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.member-description {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .team-member {
+    flex: 1 1 45%;
+    max-width: 45%;
+  }
+}
+
+@media (max-width: 576px) {
+  .team-member {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
 }

@@ -1,20 +1,36 @@
-// team.tsx
 import React from "react";
 import "./Team.css";
+
+import member1Image from "./assets/member1.jpeg";
+import member2Image from "./assets/member2.jpeg";
+import member3Image from "./assets/member3.jpeg";
 
 export const Team: React.FC = () => {
   return (
     <div className="team-container">
-      <h2 className="text-center">Meet Our Team</h2>
-      <div className="row">
+      <h2 className="text-center">Team FireFighter</h2>
+      <div className="team-grid">
         {teamMembers.map((member, index) => (
-          <div className="col-md-4" key={index}>
-            <div className="team-member">
-              <img src={'src/assets/akikiki-icon.png'} alt={member.name} className="member-photo" />
-              <h3>{member.name}</h3>
-              <h4>{member.role}</h4>
-              <p>{member.description}</p>
+          <div className="team-member" key={index}>
+            <div className="member-photo-container">
+              <img
+                src={member.image}
+                alt={member.name}
+                className="member-photo"
+              />
             </div>
+            <h3 className="member-name">{member.name}</h3>
+            <p className="member-description">{member.description}</p>
+            {member.linkedin && (
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="member-linkedin"
+              >
+                Connect on LinkedIn
+              </a>
+            )}
           </div>
         ))}
       </div>
@@ -24,22 +40,23 @@ export const Team: React.FC = () => {
 
 const teamMembers = [
   {
-    name: "Member 1",
-    role: "Role 1",
-    image: "path/to/member1.jpg", // Replace with actual image paths
-    description: "Brief description about Member 1.",
+    name: "Dayeon Yoo",
+    image: member1Image,
+    description:
+      "Dayeon Yoo is a full-stack developer and startup founder with expertise in AI, and app & web development. She has successfully led projects like SnapIT!, an AI-powered photo booth app, and co-founded HospitalPeople, a healthcare startup. Dayeon is passionate about solving real-world problems through innovative software solutions. She is currently an undergraduate Computer Science student at UNM, where she also works as a faculty aide in the machine learning field.",
+    linkedin: "https://www.linkedin.com/in/dayeon-yoo-71a705276/",
   },
   {
-    name: "Member 2",
-    role: "Role 2",
-    image: "path/to/member2.jpg", // Replace with actual image paths
-    description: "Brief description about Member 2.",
+    name: "Chaeeun Park",
+    image: member2Image,
+    description:
+      "Chaeeun Park is a master's student at UNM. She is an entrepreneur who has won the Lobo Hackathon twice and was a finalist in a fintech idea competition. She is currently researching machine learning. She enjoys taking on challenges!!",
+    linkedin: "https://www.linkedin.com/in/chaeeun-park-a91328221/",
   },
   {
-    name: "Member 3",
-    role: "Role 3",
-    image: "path/to/member3.jpg", // Replace with actual image paths
-    description: "Brief description about Member 3.",
+    name: "Gwanwoo Jin",
+    image: member3Image,
+    description:
+      "As a CEO of STGD, Biodiversity Conservation Advocacy Team, Main director of youth session artwork project of the 8th IUCN ASIA RCF. Gwanwoo Jin is an artist who uses language to create animal illustrations, with a strong focus on biodiversity education. As an ambassador for the National Ecological Institute, he also leverages his influence to promote environmental awareness..",
   },
 ];
-
