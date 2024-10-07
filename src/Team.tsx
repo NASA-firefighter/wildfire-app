@@ -4,11 +4,16 @@ import "./Team.css";
 import member1Image from "./assets/member1.jpeg";
 import member2Image from "./assets/member2.jpeg";
 import member3Image from "./assets/member3.jpeg";
+import logo from "./assets/logo.webp";
 
 export const Team: React.FC = () => {
   return (
     <div className="team-container">
+      <div className="logo-container">
+        <img src={logo} width={200} alt="Team Logo" className="team-logo" />
+      </div>
       <h2 className="text-center">Team FireFighter</h2>
+
       <div className="team-grid">
         {teamMembers.map((member, index) => (
           <div className="team-member" key={index}>

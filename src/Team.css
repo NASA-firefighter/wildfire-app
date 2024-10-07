@@ -8,29 +8,38 @@
   font-family: "Arial", sans-serif;
 }
 
+.logo-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.team-logo {
+  max-width: 200px;
+  height: auto;
+}
+
 h2.text-center {
   color: #333;
   font-size: 2.5rem;
   margin-bottom: 40px;
-  text-transform: uppercase;
 }
 
 .team-grid {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-between; /* Spread the team members evenly */
+  flex-wrap: wrap; /* Make it responsive on smaller screens */
   gap: 30px;
 }
 
 .team-member {
-  flex: 1 1 30%;
-  max-width: 30%;
+  flex: 1 1 calc(33.333% - 20px); /* Make each member take up 1/3 of the row */
   background-color: #f9f9f9;
   border-radius: 8px;
   padding: 20px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  max-width: calc(30% - 20px);
 }
 
 .team-member:hover {
@@ -63,29 +72,33 @@ h2.text-center {
   margin: 10px 0;
 }
 
-.member-role {
-  font-size: 1.2rem;
-  color: #777;
-  margin-bottom: 15px;
-}
-
 .member-description {
   font-size: 1rem;
   color: #555;
   line-height: 1.6;
 }
 
+.member-linkedin {
+  font-size: 1rem;
+  color: #0066cc;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.member-linkedin:hover {
+  text-decoration: underline;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .team-member {
-    flex: 1 1 45%;
-    max-width: 45%;
+    flex: 1 1 45%; /* Two team members per row on smaller screens */
   }
 }
 
 @media (max-width: 576px) {
   .team-member {
-    flex: 1 1 100%;
-    max-width: 100%;
+    flex: 1 1 100%; /* One team member per row on mobile screens */
   }
 }
